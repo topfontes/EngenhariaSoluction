@@ -1,0 +1,106 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package br.com.easynet.gwt.easyportal.jb;
+
+import br.com.easynet.easyportal.jb.INotSecurity;
+import br.com.easynet.gwt.easyportal.transfer.Ina_insumo_antigoT;
+import br.com.easynet.jb.EasyDownloadJB;
+import java.io.ByteArrayOutputStream;
+import java.util.List;
+import jxl.Workbook;
+import jxl.format.Colour;
+import jxl.write.Label;
+import jxl.write.NumberFormats;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+
+/**
+ *
+ * @author marcos
+ */
+public class Gerar_xlsInsumoJB extends SystemBase implements INotSecurity{
+    @Override
+    public void pageLoad() throws Exception {
+        super.pageLoad();
+    }
+
+
+
+    public void gerarArquivoXls() {
+        try {
+
+            List<Ina_insumo_antigoT> list = getIna_insumo_antigoDAO().getAll();
+
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            WritableWorkbook workbook = Workbook.createWorkbook(baos);
+            WritableSheet sheet = workbook.createSheet("PMS", 0);
+            WritableFont arial12font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
+            WritableFont arial12fontWidth = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
+            arial12fontWidth.setPointSize(500);
+            WritableCellFormat arial12format = new WritableCellFormat(arial12font);
+            WritableFont arial10font = new WritableFont(WritableFont.ARIAL, 10);
+            WritableCellFormat arial10format = new WritableCellFormat(arial10font);
+
+
+            String[] cabecalhoColunas = {"Código", "Composição"};
+            WritableCellFormat formatTitile = new WritableCellFormat(NumberFormats.FLOAT);
+            formatTitile.setBackground(Colour.GOLD);
+
+            WritableCellFormat formatkey = new WritableCellFormat(NumberFormats.FLOAT);
+            formatkey.setBackground(Colour.GOLD);
+
+            for (int i = 0; i < cabecalhoColunas.length; i++) {
+                String title = cabecalhoColunas[i];
+                Label label = new Label(i, 1, title, formatTitile);
+                sheet.addCell(label);
+            }
+
+            WritableCellFormat wt = new WritableCellFormat(NumberFormats.FLOAT);
+            wt.setBackground(Colour.GOLD);
+            wt.setAlignment(jxl.format.Alignment.RIGHT);
+            wt.setFont(arial10font);
+
+            int y = 5;
+            for (int i = 0; i < list.size(); i++) {
+                int x = 0;
+                Label label = new Label(x++, y, list.get(i).getIna_tx_codigo() + "", arial10format);
+                sheet.addCell(label);
+
+                label = new Label(x++, y++, list.get(i).getIna_tx_descricao() + "", arial10format);
+                sheet.addCell(label);
+            }
+
+            String filename = "Insumos.xls";
+            getSession().setAttribute("baos", baos);
+            getSession().setAttribute("filename", filename);
+            workbook.write();
+            workbook.close();
+            download(baos, filename);
+            setMsg("Arquivo gerado com sucesso!");
+
+        } catch (Exception e) {
+        }
+
+    }
+    public void download(ByteArrayOutputStream baos, String filename) throws Exception {
+        try {
+            if (baos != null) {
+                getRequest().setAttribute(EasyDownloadJB.CONTENT_TYPE, "arquivo/xls");
+                getRequest().setAttribute(EasyDownloadJB.FILE_NAME, filename);
+                getRequest().setAttribute(EasyDownloadJB.DATA, baos.toByteArray());
+                getPage().forward("/portal/easydownload.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            setMsg("Falha ao realizar consulta!");
+        } finally {
+            close();
+        }
+    }
+}

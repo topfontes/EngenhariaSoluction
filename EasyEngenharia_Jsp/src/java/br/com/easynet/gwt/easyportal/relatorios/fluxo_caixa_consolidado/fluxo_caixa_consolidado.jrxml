@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="547" leftMargin="29" rightMargin="19" topMargin="29" bottomMargin="29">
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="empreendimento" class="java.lang.String"/>
+	<parameter name="localizacao" class="java.lang.String"/>
+	<parameter name="referencia1" class="java.lang.String"/>
+	<parameter name="referencia2" class="java.lang.String"/>
+	<parameter name="sequencia" class="java.lang.String"/>
+	<parameter name="pathlogoSistema" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{pathlogoSistema}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logoCliente" class="java.lang.Object"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="ultimo_valor_consolidado" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="receita_despesas" class="java.lang.Double">
+		<fieldDescription><![CDATA[receita_despesas]]></fieldDescription>
+	</field>
+	<field name="retornos" class="java.lang.Double">
+		<fieldDescription><![CDATA[retornos]]></fieldDescription>
+	</field>
+	<field name="item" class="java.lang.Integer">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<field name="obr_nr_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[obr_nr_id]]></fieldDescription>
+	</field>
+	<field name="fluxoIxR" class="java.lang.Double">
+		<fieldDescription><![CDATA[fluxoIxR]]></fieldDescription>
+	</field>
+	<field name="fluxo_consolidado" class="java.lang.Double">
+		<fieldDescription><![CDATA[fluxo_consolidado]]></fieldDescription>
+	</field>
+	<field name="receita" class="java.lang.Double">
+		<fieldDescription><![CDATA[receita]]></fieldDescription>
+	</field>
+	<field name="mes_ano" class="java.lang.String">
+		<fieldDescription><![CDATA[mes_ano]]></fieldDescription>
+	</field>
+	<field name="mes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[mes]]></fieldDescription>
+	</field>
+	<field name="investimento" class="java.lang.Double">
+		<fieldDescription><![CDATA[investimento]]></fieldDescription>
+	</field>
+	<field name="despesas" class="java.lang.Double">
+		<fieldDescription><![CDATA[despesas]]></fieldDescription>
+	</field>
+	<field name="ano" class="java.lang.Integer">
+		<fieldDescription><![CDATA[ano]]></fieldDescription>
+	</field>
+	<variable name="totalreceita" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{receita}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalDespesa" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{despesas}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TotalrecDesp" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{receita_despesas}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalFluxo" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{fluxo_consolidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalInvest" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{investimento}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalRetorno" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{retornos}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalFluxoIR" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{fluxoIxR}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA["1"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="784" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="547" height="784" forecolor="#3366FF"/>
+				<graphicElement>
+					<pen lineWidth="6.75"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="60" width="80" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMPREENDIMENTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="71" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="82" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[LOCALIZAÇÃO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="91" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMITIDO EM:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="60" width="307" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{empreendimento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="80" width="433" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{localizacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="47" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{referencia2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="34" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sequencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="71" width="307" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="20" y="12" width="44" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{pathlogoSistema}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="477" y="12" width="44" height="44"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="108" y="91" width="100" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="13" width="413" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="9" y="13" width="530" height="12" backcolor="#FFFF99"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="25" width="530" height="20" backcolor="#FFFF99"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="34" width="18" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="30" y="25" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="32" y="34" width="33" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[PERÍODO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="70" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="136" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="203" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="355" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="275" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="480" y="25" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="417" y="25" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="98" y="34" width="33" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[RECEITAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="34" width="45" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[DESPESAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="34" width="45" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[-DESPESAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="34" width="79" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[FLUXO CONSOLIDADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="34" width="59" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[INVESTIMENTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="34" width="43" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[RETORNOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="34" width="43" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[FLUXO I x R]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="25" width="40" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[RECEITAS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="0" width="530" height="10" forecolor="#CCCCFF" backcolor="#CCCCFF">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(($V{contador}.intValue())%2).equals(new Integer("0")))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<line>
+				<reportElement x="136" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="70" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="30" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="203" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="9" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="275" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="417" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="355" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement x="480" y="0" width="1" height="10"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="415" y="1" width="62" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{retornos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="1" width="13" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="481" y="1" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fluxoIxR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="280" y="1" width="70" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fluxo_consolidado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="139" y="1" width="61" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{despesas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="1" width="34" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mes_ano}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="356" y="1" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{investimento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="73" y="1" width="58" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{receita}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="205" y="1" width="68" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{receita_despesas}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="538" y="0" width="1" height="10"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement mode="Opaque" x="0" y="16" width="547" height="1" forecolor="#3366FF" backcolor="#0066FF"/>
+				<graphicElement>
+					<pen lineWidth="12.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="26" y="9" width="500" height="7" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BCCONTROL - SISTEMA PARA CONTROLADORIA DE CUSTOS DA BC ENGENHARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="14" width="499" height="7" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BC ENGENHARIA DE CUSTOS LTDA ME - CNPJ 11.293.236/0001-80 - Rua Nestor Sampaio n° 140. Térreo - Bairro Luzia - CEP 49.045-000 - Aracaju -Sergipe -(79)3243-6655]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="0" width="530" height="12" forecolor="#FFFFFF" backcolor="#FFFF99"/>
+			</rectangle>
+			<line>
+				<reportElement x="70" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="136" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="203" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="538" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="9" y="12" width="530" height="1"/>
+			</line>
+			<line>
+				<reportElement x="9" y="0" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="0" width="50" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral]]></text>
+			</staticText>
+			<line>
+				<reportElement x="417" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="355" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="275" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="480" y="0" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="74" y="2" width="57" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalreceita}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="139" y="2" width="61" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalDespesa}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="211" y="2" width="62" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{TotalrecDesp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="356" y="2" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalInvest}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="419" y="2" width="58" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalRetorno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="481" y="2" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalFluxoIR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="279" y="2" width="71" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{ultimo_valor_consolidado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

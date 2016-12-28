@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/engenharia">
+
+<!--<Resource auth="Container" driverClassName="org.postgresql.Driver" maxActive="10" maxIdle="0" maxWait="-1" name="jdbc/easyportalds" password="i9tiesosucesso" type="javax.sql.DataSource" url="jdbc:postgresql://50.30.46.162:5432/dbengenharia" username="postgres"/>
+<Resource auth="Container" driverClassName="org.postgresql.Driver" maxActive="10" maxIdle="0" maxWait="-1" name="jdbc/engenhariads" password="i9tiesosucesso" type="javax.sql.DataSource" url="jdbc:postgresql://50.30.46.162:5432/dbengenharia" username="postgres"/>-->
+
+<!--     <Resource auth="Container" driverClassName="org.postgresql.Driver" maxActive="5" maxIdle="0" maxWait="-1" name="jdbc/easyportalds" password="i9tiesosucesso" type="javax.sql.DataSource" url="jdbc:postgresql://50.30.46.162:5432/bcengcustos" username="bcengcustos"/>
+     <Resource auth="Container" driverClassName="org.postgresql.Driver" maxActive="5" maxIdle="0" maxWait="-1" name="jdbc/engenhariads" password="i9tiesosucesso" type="javax.sql.DataSource" url="jdbc:postgresql://50.30.46.162:5432/bcengcustos" username="bcengcustos"/>-->
+
+</Context>

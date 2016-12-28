@@ -1,0 +1,43 @@
+
+
+                    RECEBIMENTOS
+
+ I  DESCRIÇÃO                 AG. FI  CLIENT TOTAL
+
+ n null                         null    null  null
+
+                     PAGAMENTO
+
+ I   DESCRIÇÃO                NO PER  ATÉ O A REAL
+
+   2                             222      22    22
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

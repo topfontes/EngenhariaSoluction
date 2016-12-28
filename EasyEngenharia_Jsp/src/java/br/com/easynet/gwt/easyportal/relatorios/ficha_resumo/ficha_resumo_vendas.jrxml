@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="list_recebimento" class="java.lang.Object"/>
+	<parameter name="list_lucro" class="java.lang.Object"/>
+	<parameter name="list_cronograma" class="java.lang.Object"/>
+	<parameter name="item_pagamento" class="java.lang.String"/>
+	<parameter name="descricao_pagamento" class="java.lang.String"/>
+	<parameter name="no_periodo_pagamento" class="java.lang.String"/>
+	<parameter name="ate_periodo_pagamento" class="java.lang.String"/>
+	<parameter name="a_realizar_pagamento" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Meus Arquivos\\Projetos\\Engenharia\\EasyEngenharia_Jsp\\src\\java\\br\\com\\easynet\\gwt\\easyportal\\relatorios\\ficha_resumo\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="column1" class="java.lang.String">
+		<fieldDescription><![CDATA[column1]]></fieldDescription>
+	</field>
+	<field name="column2" class="java.lang.String">
+		<fieldDescription><![CDATA[column2]]></fieldDescription>
+	</field>
+	<field name="column3" class="java.lang.String">
+		<fieldDescription><![CDATA[column3]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="grupo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[grupo]]></fieldDescription>
+	</field>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA["1"]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="21" width="510" height="22" backcolor="#FFFF99"/>
+			</rectangle>
+			<line>
+				<reportElement x="301" y="22" width="1" height="21"/>
+			</line>
+			<staticText>
+				<reportElement x="447" y="32" width="69" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="31" y="22" width="1" height="21"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="28" width="17" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="28" width="60" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[VGV ORIGINAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="378" y="22" width="1" height="21"/>
+			</line>
+			<rectangle>
+				<reportElement x="10" y="9" width="510" height="12" backcolor="#FFFF99"/>
+			</rectangle>
+			<line>
+				<reportElement x="444" y="22" width="1" height="21"/>
+			</line>
+			<staticText>
+				<reportElement x="380" y="28" width="62" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[VGV ATUALIZADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="23" width="67" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[VGV ATUALIZADO -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="28" width="100" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="11" width="484" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[VENDAS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="0" width="510" height="9" forecolor="#CCCCFF" backcolor="#CCCCFF">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(($V{contador}.intValue())%2).equals(new Integer("0")))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="37" y="0" width="264" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="0" width="60" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{column1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="62" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{column2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="67" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{column3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="0" width="19" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="5" width="555" height="17"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ate_periodo_pagamento">
+					<subreportParameterExpression><![CDATA[$P{ate_periodo_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="a_realizar_pagamento">
+					<subreportParameterExpression><![CDATA[$P{a_realizar_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="list_lucro">
+					<subreportParameterExpression><![CDATA[$P{list_lucro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="list_cronograma">
+					<subreportParameterExpression><![CDATA[$P{list_cronograma}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="no_periodo_pagamento">
+					<subreportParameterExpression><![CDATA[$P{no_periodo_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="descricao_pagamento">
+					<subreportParameterExpression><![CDATA[$P{descricao_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="item_pagamento">
+					<subreportParameterExpression><![CDATA[$P{item_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{list_recebimento}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "ficha_resumo_recebimento.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

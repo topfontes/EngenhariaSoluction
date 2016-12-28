@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module> 
+    <inherits name="com.google.gwt.i18n.I18N"/>
+    <inherits name="com.google.gwt.user.User"/>
+    <inherits name='com.google.gwt.http.HTTP'/>
+    <inherits name='com.google.gwt.json.JSON'/> 
+    <inherits name='com.extjs.gxt.ui.GXT'/>
+    
+    <inherits name='br.com.easyportal.gwt.EasyPortalGWT'/>
+    <inherits name="br.com.easynet.gwt.EasyNetGWT"/>
+    
+    <inherits name='com.extjs.gxt.themes.Themes'/>
+    <inherits name='com.extjs.gxt.desktop.WebDesktop'/>
+    <extend-property name="locale" values="pt_BR"/>
+    <entry-point class="br.com.easynet.gwt.easyportal.client.MainEntryPoint"/>
+    <set-property name="user.agent" value="gecko1_8"/>
+</module>
