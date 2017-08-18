@@ -6,7 +6,7 @@
 ${fto_fotosJB.execute}                                         
 {"resultado":
 {"msg":"${fto_fotosJB.msg}",
-     "fto_fotos":{	"fto_nr_id":"${fto_fotosJB.fto_fotosT.fto_nr_id}"
+     "fto_fotos":{"fto_nr_id":"${fto_fotosJB.fto_fotosT.fto_nr_id}"
  ,	"obr_nr_id":"${fto_fotosJB.fto_fotosT.obr_nr_id}"
  ,	"fto_nr_mes":"${fto_fotosJB.fto_fotosT.fto_nr_mes}"
  ,	"fto_nr_ano":"${fto_fotosJB.fto_fotosT.fto_nr_ano}"
