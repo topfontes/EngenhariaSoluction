@@ -15,6 +15,7 @@ import br.com.easynet.easyportal.modelos_pdf.DiconAPagarXls;
 import br.com.easynet.easyportal.modelos_pdf.DiconPagas;
 import br.com.easynet.easyportal.modelos_pdf.EngebAPagarXLS;
 import br.com.easynet.easyportal.modelos_pdf.EngebPagasXLS;
+import br.com.easynet.easyportal.modelos_pdf.LMarquezzoAPagarXLS;
 import br.com.easynet.easyportal.modelos_pdf.LMarquezzoPagasXLS;
 import br.com.easynet.easyportal.modelos_pdf.MarquezzoAPagar;
 import br.com.easynet.easyportal.modelos_pdf.MarquezzoPagas;
@@ -213,6 +214,13 @@ public class ImportacaoContaPagarJB extends SystemBase implements INotSecurity {
                     } else {
                         ADM_Pagas admapagar = new ADM_Pagas(ctp_conta_pagarT, cdao, bais);
                         setMsg(admapagar.read());
+                    }
+                    break;
+                }
+                case 14: {
+                    if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("A")) {
+                        LMarquezzoAPagarXLS lMarquezzoAPagarXLS = new LMarquezzoAPagarXLS(ctp_conta_pagarT, cdao, bais);
+                        setMsg(lMarquezzoAPagarXLS.read());
                     }
                     break;
                 }

@@ -333,9 +333,13 @@ public class ImportacaoContaPagarGWT extends Window implements IListenetResponse
         if (this.tipo.equalsIgnoreCase("CTP")) {
             tipoT = new TipoArquivoCtpTGWT();
             tipoT.setValue(7);
-            tipoT.setDisplay("L MARQUEZZO NOVO");
+            tipoT.setDisplay("L MARQUEZZO XLS PAGAS");
             list.add(tipoT);
 
+            tipoT = new TipoArquivoCtpTGWT();
+            tipoT.setValue(14);
+            tipoT.setDisplay("L MARQUEZZO XLS A PAGAR");
+            list.add(tipoT);
         }
 
         tipoT = new TipoArquivoCtpTGWT();
@@ -347,7 +351,7 @@ public class ImportacaoContaPagarGWT extends Window implements IListenetResponse
         tipoT.setValue(9);
         tipoT.setDisplay("MODULO");
         list.add(tipoT);
-        
+
         tipoT = new TipoArquivoCtpTGWT();
         tipoT.setValue(10);
         tipoT.setDisplay("ADM");
