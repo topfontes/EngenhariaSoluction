@@ -6,6 +6,9 @@
         <group>
             <file>file:/Users/topfontes/projetos/EngenhariaSoluction/EasyEngenhariaGWT/src/java/br/com/easynet/gwt/easyportal/client/display/easyEngenharia/ActionMenu.java</file>
             <file>file:/Users/topfontes/projetos/EngenhariaSoluction/EasyEngenhariaGWT/src/java/br/com/easynet/gwt/easyportal/client/display/easyEngenharia/easyconstru/importacao/ImportacaoContaPagarGWT.java</file>
+            <file>file:/Users/topfontes/projetos/EngenhariaSoluction/EasyEngenhariaGWT/src/java/br/com/easynet/gwt/easyportal/client/MainEntryPoint.java</file>
+            <file>file:/Users/topfontes/projetos/EngenhariaSoluction/EasyEngenhariaGWT/src/java/br/com/easynet/gwt/easyportal/client/display/easyEngenharia/easyconstru/cli_cliente/Cli_clienteConsultGWT.java</file>
+            <file>file:/Users/topfontes/projetos/EngenhariaSoluction/EasyEngenhariaGWT/src/java/br/com/easynet/gwt/easyportal/client/Constantes.java</file>
         </group>
     </open-files>
 </project-private>
