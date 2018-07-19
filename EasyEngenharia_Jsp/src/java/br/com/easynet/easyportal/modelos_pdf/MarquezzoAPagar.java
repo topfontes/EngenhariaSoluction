@@ -97,7 +97,7 @@ public class MarquezzoAPagar extends SystemBase {
 
     public void povoaConta() {
         try {
-            treeConta = ctp_conta_pagarDAO.getByObr_nr_idTree(this.ctp_conta_pagarT);
+            //treeConta = ctp_conta_pagarDAO.getByObr_nr_idTree(this.ctp_conta_pagarT);
         } catch (Exception e) {
         }
     }
@@ -214,6 +214,7 @@ public class MarquezzoAPagar extends SystemBase {
         return p;
 
     }
+
 
     public int posEspaco() {
         int p = 0;
@@ -371,7 +372,6 @@ public class MarquezzoAPagar extends SystemBase {
 
         } finally {
             return bl;
-
         }
     }
 

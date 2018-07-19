@@ -519,4 +519,55 @@ public class Ipo_item_plano_contas_obraDAO extends ObjectDAO {
             }
         }
     }
+    public java.util.TreeMap<Integer, Double> getByObr_nr_idClasseBI(int obr_nr_id) throws Exception {
+/* 324 */     PreparedStatement pStmt = null;
+/* 325 */     ResultSet rs = null;
+/*     */     try {
+/* 327 */       StringBuffer sql = new StringBuffer().append("SELECT plc.plc_nr_id_super, sum(ipo.ipo_nr_vl_total) AS custo_orcado");
+/* 328 */       sql.append(" FROM easyconstru.ipo_item_plano_contas_obra ipo");
+/* 329 */       sql.append(" JOIN easyconstru.eplc_equivalencia_plano_contas equiv ON equiv.plco_nr_id = ipo.plco_nr_id");
+/* 330 */       sql.append(" JOIN easyconstru.plc_plano_contas plc ON plc.plc_nr_id = equiv.plc_nr_id");
+/* 331 */       sql.append(" where ipo.obr_nr_id=? and ipo_bl_curva_abc = true group by 1");
+/* 332 */       pStmt = this.con.prepareStatement(sql.toString());
+/* 333 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 334 */       rs = pStmt.executeQuery();
+/* 335 */       java.util.TreeMap<Integer, Double> tree = new java.util.TreeMap();
+/* 336 */       while (rs.next()) {
+/* 337 */         tree.put(Integer.valueOf(rs.getInt("plc_nr_id_super")), Double.valueOf(rs.getDouble("custo_orcado")));
+/*     */       }
+/* 339 */       return tree;
+/*     */     } catch (Exception e) {
+/* 341 */       throw e;
+/*     */     } finally {
+/*     */       try {
+/* 344 */         rs.close();
+/* 345 */         pStmt.close();
+/*     */       } catch (Exception localException2) {}
+/*     */     }
+/*     */   }
+     public java.util.TreeMap<Integer, Double> getByObr_nr_idClassePLCOBI(int obr_nr_id) throws Exception {
+/* 351 */     PreparedStatement pStmt = null;
+/* 352 */     ResultSet rs = null;
+/*     */     try {
+/* 354 */       StringBuffer sql = new StringBuffer().append("SELECT plco_nr_id , sum(ipo.ipo_nr_vl_total) AS custo_orcado");
+/* 355 */       sql.append(" FROM easyconstru.ipo_item_plano_contas_obra ipo");
+/* 356 */       sql.append(" where ipo.obr_nr_id=? group by 1");
+/* 357 */       pStmt = this.con.prepareStatement(sql.toString());
+/* 358 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 359 */       rs = pStmt.executeQuery();
+/* 360 */       java.util.TreeMap<Integer, Double> tree = new java.util.TreeMap();
+/* 361 */       while (rs.next()) {
+/* 362 */         tree.put(Integer.valueOf(rs.getInt("plco_nr_id")), Double.valueOf(rs.getDouble("custo_orcado")));
+/*     */       }
+/* 364 */       return tree;
+/*     */     } catch (Exception e) {
+/* 366 */       throw e;
+/*     */     } finally {
+/*     */       try {
+/* 369 */         rs.close();
+/* 370 */         pStmt.close();
+/*     */       }
+/*     */       catch (Exception localException2) {}
+/*     */     }
+/*     */   }
 }

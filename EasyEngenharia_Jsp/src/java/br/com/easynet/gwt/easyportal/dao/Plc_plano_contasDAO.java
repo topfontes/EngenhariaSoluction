@@ -377,4 +377,45 @@ public class Plc_plano_contasDAO extends ObjectDAO {
         }
         return null;
     }
+    public java.util.List<Plc_plano_contasT> getByContaSubClasseBI(int obr_nr_id)
+/*     */     throws Exception
+/*     */   {
+/* 358 */     PreparedStatement pStmt = null;
+/* 359 */     ResultSet rs = null;
+/*     */     try {
+/* 361 */       StringBuffer sql = new StringBuffer();
+/*     */       
+/* 363 */       sql.append("SELECT plc.plc_nr_id_super, plc_super.plc_tx_nome AS classe, plc.plc_nr_id, plc.plc_tx_nome , count(plc.plc_nr_id) qt ");
+/* 364 */       sql.append(" FROM easyconstru.ipo_item_plano_contas_obra ipo");
+/* 365 */       sql.append(" JOIN easyconstru.plco_plano_contas_orcamento plco ON plco.plco_nr_id = ipo.plco_nr_id");
+/* 366 */       sql.append(" JOIN easyconstru.eplc_equivalencia_plano_contas equiv ON equiv.plco_nr_id = ipo.plco_nr_id");
+/* 367 */       sql.append(" JOIN easyconstru.plc_plano_contas plc ON plc.plc_nr_id = equiv.plc_nr_id");
+/* 368 */       sql.append(" JOIN easyconstru.plc_plano_contas plc_super ON plc.plc_nr_id_super = plc_super.plc_nr_id");
+/* 369 */       sql.append(" where ipo.obr_nr_id = ?  group by 1,2,3,4 order by plc_super.plc_tx_nome, plc.plc_tx_nome");
+/*     */       
+/*     */ 
+/*     */ 
+/* 373 */       pStmt = this.con.prepareStatement(sql.toString());
+/* 374 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 375 */       rs = pStmt.executeQuery();
+/* 376 */       java.util.List localList = resultSetToObjectTransferBI(rs);return localList;
+/*     */     } catch (Exception e) {
+/* 378 */       e = e;
+/* 379 */       throw e;
+/*     */     }
+/*     */     finally {}
+/*     */   }
+    private java.util.List<Plc_plano_contasT> resultSetToObjectTransferBI(ResultSet rs) throws Exception
+/*     */   {
+/*  80 */     java.util.List<Plc_plano_contasT> objs = new java.util.Vector();
+/*  81 */     while (rs.next()) {
+/*  82 */       Plc_plano_contasT plc_plano_contasT = new Plc_plano_contasT();
+/*  83 */       plc_plano_contasT.setPlc_nr_id(rs.getInt("plc_nr_id"));
+/*  84 */       plc_plano_contasT.setPlc_nr_id_super(rs.getInt("plc_nr_id_super"));
+/*  85 */       plc_plano_contasT.setPlc_tx_nome(rs.getString("plc_tx_nome"));
+/*  86 */       plc_plano_contasT.setPlc_tx_nome_classe(rs.getString("classe"));
+/*  87 */       objs.add(plc_plano_contasT);
+/*     */     }
+/*  89 */     return objs;
+/*     */   }
 }

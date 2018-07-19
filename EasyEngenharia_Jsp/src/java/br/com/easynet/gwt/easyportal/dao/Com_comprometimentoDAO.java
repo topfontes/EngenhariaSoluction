@@ -372,4 +372,35 @@ public class Com_comprometimentoDAO extends ObjectDAO {
             }
         }
     }
+    public java.util.TreeMap<Integer, Double> getValorSubClasseAcumuladoBI(int obr_nr_id, int mes, int ano) throws Exception {
+/* 377 */     PreparedStatement pStmt = null;
+/* 378 */     ResultSet rs = null;
+/*     */     try {
+/* 380 */       StringBuffer sql = new StringBuffer();
+/* 381 */       sql.append("select plc_nr_id,  sum(com_nr_valor)as valor from easyconstru.com_comprometimento");
+/* 382 */       sql.append(" where obr_nr_id =? and ((com_nr_mes <=? and com_nr_ano =?) or com_nr_ano <?)");
+/* 383 */       sql.append(" group by plc_nr_id");
+/*     */       
+/* 385 */       pStmt = this.con.prepareStatement(sql.toString());
+/* 386 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 387 */       pStmt.setObject(2, Integer.valueOf(mes));
+/* 388 */       pStmt.setObject(3, Integer.valueOf(ano));
+/* 389 */       pStmt.setObject(4, Integer.valueOf(ano));
+/* 390 */       rs = pStmt.executeQuery();
+/* 391 */       java.util.TreeMap<Integer, Double> obj = new java.util.TreeMap();
+/* 392 */       while (rs.next()) {
+/* 393 */         obj.put(Integer.valueOf(rs.getInt("plc_nr_id")), Double.valueOf(rs.getDouble("valor")));
+/*     */       }
+/* 395 */       return obj;
+/*     */     } catch (Exception e) {
+/* 397 */       throw e;
+/*     */     } finally {
+/*     */       try {
+/* 400 */         rs.close();
+/* 401 */         pStmt.close();
+/*     */       }
+/*     */       catch (Exception localException2) {}
+/*     */     }
+/*     */   }
+/*     */ 
 }

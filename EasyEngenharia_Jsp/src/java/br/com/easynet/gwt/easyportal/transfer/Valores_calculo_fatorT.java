@@ -1,232 +1,237 @@
-package br.com.easynet.gwt.easyportal.transfer;
+/*     */ package br.com.easynet.gwt.easyportal.transfer;
+/*     */ 
+/*     */ 
+/*     */ public class Valores_calculo_fatorT
+/*     */ {
+/*     */   private int obr_nr_id;
+/*     */   
+/*     */   private int plc_nr_id;
+/*     */   
+/*     */   private int mes;
+/*     */   private int ano;
+/*     */   private String plc_tx_nome;
+/*     */   private String plc_tx_super;
+/*     */   private float valor_pago_acumulado;
+/*     */   private float valor_apagar_geral;
+/*     */   private float valor_comp_periodo;
+/*     */   private float valor_comp_mes_anterior;
+/*     */   private float valor_est_periodo;
+/*     */   private float valor_est_mes_anterior;
+/*     */   private float valor_prev_pms_acumulado;
+/*     */   private float fator_Atual;
+/*     */   private float fator_projetado;
+/*     */   
+/*     */   public int getPlc_nr_id()
+/*     */   {
+/*  26 */     return this.plc_nr_id;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setPlc_nr_id(int plc_nr_id)
+/*     */   {
+/*  33 */     this.plc_nr_id = plc_nr_id;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_pago_acumulado()
+/*     */   {
+/*  40 */     return this.valor_pago_acumulado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_pago_acumulado(float valor_pago_acumulado)
+/*     */   {
+/*  47 */     this.valor_pago_acumulado = valor_pago_acumulado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_apagar_geral()
+/*     */   {
+/*  54 */     return this.valor_apagar_geral;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_apagar_geral(float valor_apagar_geral)
+/*     */   {
+/*  61 */     this.valor_apagar_geral = valor_apagar_geral;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_comp_periodo()
+/*     */   {
+/*  68 */     return this.valor_comp_periodo;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_comp_periodo(float valor_comp_periodo)
+/*     */   {
+/*  75 */     this.valor_comp_periodo = valor_comp_periodo;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_comp_mes_anterior()
+/*     */   {
+/*  82 */     return this.valor_comp_mes_anterior;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_comp_mes_anterior(float valor_comp_mes_anterior)
+/*     */   {
+/*  89 */     this.valor_comp_mes_anterior = valor_comp_mes_anterior;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_est_periodo()
+/*     */   {
+/*  96 */     return this.valor_est_periodo;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_est_periodo(float valor_est_periodo)
+/*     */   {
+/* 103 */     this.valor_est_periodo = valor_est_periodo;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_est_mes_anterior()
+/*     */   {
+/* 110 */     return this.valor_est_mes_anterior;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_est_mes_anterior(float valor_est_mes_anterior)
+/*     */   {
+/* 117 */     this.valor_est_mes_anterior = valor_est_mes_anterior;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getValor_prev_pms_acumulado()
+/*     */   {
+/* 124 */     return this.valor_prev_pms_acumulado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setValor_prev_pms_acumulado(float valor_prev_pms_acumulado)
+/*     */   {
+/* 131 */     this.valor_prev_pms_acumulado = valor_prev_pms_acumulado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getFator_Atual()
+/*     */   {
+/* 138 */     return this.fator_Atual;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setFator_Atual(float fator_Atual)
+/*     */   {
+/* 145 */     this.fator_Atual = fator_Atual;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public String getPlc_tx_nome()
+/*     */   {
+/* 152 */     return this.plc_tx_nome;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setPlc_tx_nome(String plc_tx_nome)
+/*     */   {
+/* 159 */     this.plc_tx_nome = plc_tx_nome;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public float getFator_projetado()
+/*     */   {
+/* 166 */     return this.fator_projetado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setFator_projetado(float fator_projetado)
+/*     */   {
+/* 173 */     this.fator_projetado = fator_projetado;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public String getPlc_tx_super()
+/*     */   {
+/* 180 */     return this.plc_tx_super;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setPlc_tx_super(String plc_tx_super)
+/*     */   {
+/* 187 */     this.plc_tx_super = plc_tx_super;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public int getObr_nr_id()
+/*     */   {
+/* 194 */     return this.obr_nr_id;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setObr_nr_id(int obr_nr_id)
+/*     */   {
+/* 201 */     this.obr_nr_id = obr_nr_id;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public int getMes()
+/*     */   {
+/* 208 */     return this.mes;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setMes(int mes)
+/*     */   {
+/* 215 */     this.mes = mes;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public int getAno()
+/*     */   {
+/* 222 */     return this.ano;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public void setAno(int ano)
+/*     */   {
+/* 229 */     this.ano = ano;
+/*     */   }
+/*     */ }
 
-import br.com.easynet.annotation.Conversion;
-public class Valores_calculo_fatorT{
 
-    private int obr_nr_id;
-    private int plc_nr_id;
-    private int mes;
-    private int ano;
-    private String plc_tx_nome;
-    private String plc_tx_super;
-    private float valor_pago_acumulado;
-    private float valor_apagar_geral;
-    private float valor_comp_periodo;
-    private float valor_comp_mes_anterior;
-    private float valor_est_periodo;
-    private float valor_est_mes_anterior;
-    private float valor_prev_pms_acumulado;
-    private float fator_Atual;
-    private float fator_projetado;
-
-    /**
-     * @return the plc_nr_id
-     */
-    public int getPlc_nr_id() {
-        return plc_nr_id;
-    }
-
-    /**
-     * @param plc_nr_id the plc_nr_id to set
-     */
-    public void setPlc_nr_id(int plc_nr_id) {
-        this.plc_nr_id = plc_nr_id;
-    }
-
-    /**
-     * @return the valor_pago_acumulado
-     */
-    public float getValor_pago_acumulado() {
-        return valor_pago_acumulado;
-    }
-
-    /**
-     * @param valor_pago_acumulado the valor_pago_acumulado to set
-     */
-    public void setValor_pago_acumulado(float valor_pago_acumulado) {
-        this.valor_pago_acumulado = valor_pago_acumulado;
-    }
-
-    /**
-     * @return the valor_apagar_geral
-     */
-    public float getValor_apagar_geral() {
-        return valor_apagar_geral;
-    }
-
-    /**
-     * @param valor_apagar_geral the valor_apagar_geral to set
-     */
-    public void setValor_apagar_geral(float valor_apagar_geral) {
-        this.valor_apagar_geral = valor_apagar_geral;
-    }
-
-    /**
-     * @return the valor_comp_periodo
-     */
-    public float getValor_comp_periodo() {
-        return valor_comp_periodo;
-    }
-
-    /**
-     * @param valor_comp_periodo the valor_comp_periodo to set
-     */
-    public void setValor_comp_periodo(float valor_comp_periodo) {
-        this.valor_comp_periodo = valor_comp_periodo;
-    }
-
-    /**
-     * @return the valor_comp_mes_anterior
-     */
-    public float getValor_comp_mes_anterior() {
-        return valor_comp_mes_anterior;
-    }
-
-    /**
-     * @param valor_comp_mes_anterior the valor_comp_mes_anterior to set
-     */
-    public void setValor_comp_mes_anterior(float valor_comp_mes_anterior) {
-        this.valor_comp_mes_anterior = valor_comp_mes_anterior;
-    }
-
-    /**
-     * @return the valor_est_periodo
-     */
-    public float getValor_est_periodo() {
-        return valor_est_periodo;
-    }
-
-    /**
-     * @param valor_est_periodo the valor_est_periodo to set
-     */
-    public void setValor_est_periodo(float valor_est_periodo) {
-        this.valor_est_periodo = valor_est_periodo;
-    }
-
-    /**
-     * @return the valor_est_mes_anterior
-     */
-    public float getValor_est_mes_anterior() {
-        return valor_est_mes_anterior;
-    }
-
-    /**
-     * @param valor_est_mes_anterior the valor_est_mes_anterior to set
-     */
-    public void setValor_est_mes_anterior(float valor_est_mes_anterior) {
-        this.valor_est_mes_anterior = valor_est_mes_anterior;
-    }
-
-    /**
-     * @return the valor_prev_pms_acumulado
-     */
-    public float getValor_prev_pms_acumulado() {
-        return valor_prev_pms_acumulado;
-    }
-
-    /**
-     * @param valor_prev_pms_acumulado the valor_prev_pms_acumulado to set
-     */
-    public void setValor_prev_pms_acumulado(float valor_prev_pms_acumulado) {
-        this.valor_prev_pms_acumulado = valor_prev_pms_acumulado;
-    }
-
-    /**
-     * @return the fator_Atual
-     */
-    public float getFator_Atual() {
-        return fator_Atual;
-    }
-
-    /**
-     * @param fator_Atual the fator_Atual to set
-     */
-    public void setFator_Atual(float fator_Atual) {
-        this.fator_Atual = fator_Atual;
-    }
-
-    /**
-     * @return the plc_tx_nome
-     */
-    public String getPlc_tx_nome() {
-        return plc_tx_nome;
-    }
-
-    /**
-     * @param plc_tx_nome the plc_tx_nome to set
-     */
-    public void setPlc_tx_nome(String plc_tx_nome) {
-        this.plc_tx_nome = plc_tx_nome;
-    }
-
-    /**
-     * @return the fator_projetado
-     */
-    public float getFator_projetado() {
-        return fator_projetado;
-    }
-
-    /**
-     * @param fator_projetado the fator_projetado to set
-     */
-    public void setFator_projetado(float fator_projetado) {
-        this.fator_projetado = fator_projetado;
-    }
-
-    /**
-     * @return the plc_tx_super
-     */
-    public String getPlc_tx_super() {
-        return plc_tx_super;
-    }
-
-    /**
-     * @param plc_tx_super the plc_tx_super to set
-     */
-    public void setPlc_tx_super(String plc_tx_super) {
-        this.plc_tx_super = plc_tx_super;
-    }
-
-    /**
-     * @return the obr_nr_id
-     */
-    public int getObr_nr_id() {
-        return obr_nr_id;
-    }
-
-    /**
-     * @param obr_nr_id the obr_nr_id to set
-     */
-    public void setObr_nr_id(int obr_nr_id) {
-        this.obr_nr_id = obr_nr_id;
-    }
-
-    /**
-     * @return the mes
-     */
-    public int getMes() {
-        return mes;
-    }
-
-    /**
-     * @param mes the mes to set
-     */
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    /**
-     * @return the ano
-     */
-    public int getAno() {
-        return ano;
-    }
-
-    /**
-     * @param ano the ano to set
-     */
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-   
-}
+/* Location:              /Users/marcos/fontes3/engenharia.jar!/br/com/easynet/gwt/easyportal/transfer/Valores_calculo_fatorT.class
+ * Java compiler version: 5 (49.0)
+ * JD-Core Version:       0.7.1
+ */
