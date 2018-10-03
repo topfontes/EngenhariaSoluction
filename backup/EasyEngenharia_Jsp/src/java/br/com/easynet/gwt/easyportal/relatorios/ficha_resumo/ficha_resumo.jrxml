@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="547" leftMargin="29" rightMargin="19" topMargin="29" bottomMargin="29">
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="empreendimento" class="java.lang.String"/>
+	<parameter name="localizacao" class="java.lang.String"/>
+	<parameter name="referencia1" class="java.lang.String"/>
+	<parameter name="referencia2" class="java.lang.String"/>
+	<parameter name="sequencia" class="java.lang.String"/>
+	<parameter name="pathlogoSistema" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{pathlogoSistema}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logoCliente" class="java.lang.Object"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="unidade_construtiva" class="java.lang.String"/>
+	<parameter name="total_unidades" class="java.lang.String"/>
+	<parameter name="area_total" class="java.lang.String"/>
+	<parameter name="area_geral" class="java.lang.String"/>
+	<parameter name="list_venda" class="java.lang.Object"/>
+	<parameter name="list_recebimento" class="java.lang.Object"/>
+	<parameter name="list_lucro" class="java.lang.Object"/>
+	<parameter name="list_cronograma" class="java.lang.Object"/>
+	<parameter name="item_pagamento" class="java.lang.String"/>
+	<parameter name="descricao_pagamento" class="java.lang.String"/>
+	<parameter name="no_periodo_pagamento" class="java.lang.String"/>
+	<parameter name="ate_periodo_pagamento" class="java.lang.String"/>
+	<parameter name="a_realizar_pagamento" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Meus Arquivos\\Projetos\\Engenharia\\EasyEngenharia_Jsp\\src\\java\\br\\com\\easynet\\gwt\\easyportal\\relatorios\\ficha_resumo\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="grupo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[grupo]]></fieldDescription>
+	</field>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<field name="valor_atualizado" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_atualizado]]></fieldDescription>
+	</field>
+	<field name="valor_orig_valorAtual" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_orig_valorAtual]]></fieldDescription>
+	</field>
+	<field name="valor_original" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_original]]></fieldDescription>
+	</field>
+	<background>
+		<band height="784" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="547" height="784" forecolor="#3366FF"/>
+				<graphicElement>
+					<pen lineWidth="6.75"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="164" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="72" width="80" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMPREENDIMENTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="83" width="80" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CONSTRUTORA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="94" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[LOCALIZAÇÃO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="103" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMITIDO EM:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="72" width="285" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{empreendimento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="93" width="285" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{localizacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="47" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{referencia2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="34" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sequencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="83" width="285" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="20" y="12" width="44" height="44"/>
+			</image>
+			<image>
+				<reportElement x="477" y="12" width="44" height="44"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="230" y="103" width="100" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="13" width="413" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="118" width="102" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[UNIDADE CONSTRUTIVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="129" width="143" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Nº. TOTAL UNIDADE CONSTRUTIVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="140" width="202" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[AREA CONSTRUTIVA TOTAL DAS UND. CONST. (M²):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="151" width="203" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[AREA CONSTRUTIVA TOTAL GERAL. (M²):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="230" y="118" width="282" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{unidade_construtiva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="129" width="282" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{total_unidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="140" width="282" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{area_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="151" width="282" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{area_geral}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="55" splitType="Stretch">
+			<rectangle>
+				<reportElement x="16" y="21" width="510" height="12" backcolor="#FFFF99"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="32" width="510" height="22" backcolor="#FFFF99"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="28" y="22" width="484" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[CUSTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="39" width="17" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="39" width="100" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="34" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ORÇAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="43" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="34" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ORÇAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="43" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ATUALIZADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="34" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ATUALIZADO -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="43" width="50" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="307" y="33" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="384" y="33" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="450" y="33" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="37" y="33" width="1" height="21"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="16" y="0" width="510" height="9" forecolor="#CCCCFF" backcolor="#CCCCFF">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(($F{grupo}.intValue())%2).equals(new Integer("0")))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="38" y="0" width="269" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="385" y="0" width="62" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valor_atualizado}.doubleValue()!=0?$F{valor_atualizado}:new Double(0)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="317" y="0" width="63" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valor_original}.doubleValue()!= 0?$F{valor_original}:new Double(null)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="451" y="0" width="69" height="9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valor_orig_valorAtual}.doubleValue()!=0?$F{valor_orig_valorAtual}:new Double(null)]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="19" y="0" width="17" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement mode="Opaque" x="0" y="16" width="547" height="1" forecolor="#3366FF" backcolor="#0066FF"/>
+				<graphicElement>
+					<pen lineWidth="12.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="26" y="9" width="500" height="7" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BCCONTROL - SISTEMA PARA CONTROLADORIA DE CUSTOS DA BC ENGENHARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="14" width="499" height="7" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BC ENGENHARIA DE CUSTOS LTDA ME - CNPJ 11.293.236/0001-80 - Rua Nestor Sampaio n° 140. Térrio - Bairro Luzia - CEP 49.045-000 - Aracaju -Sergipe -(79)3243-6655]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="36" splitType="Stretch">
+			<subreport>
+				<reportElement x="3" y="5" width="519" height="31"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ate_periodo_pagamento">
+					<subreportParameterExpression><![CDATA[$P{ate_periodo_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="list_recebimento">
+					<subreportParameterExpression><![CDATA[$P{list_recebimento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="a_realizar_pagamento">
+					<subreportParameterExpression><![CDATA[$P{a_realizar_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="list_cronograma">
+					<subreportParameterExpression><![CDATA[$P{list_cronograma}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="list_lucro">
+					<subreportParameterExpression><![CDATA[$P{list_lucro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="no_periodo_pagamento">
+					<subreportParameterExpression><![CDATA[$P{no_periodo_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="descricao_pagamento">
+					<subreportParameterExpression><![CDATA[$P{descricao_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="item_pagamento">
+					<subreportParameterExpression><![CDATA[$P{item_pagamento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{list_venda}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "ficha_resumo_vendas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

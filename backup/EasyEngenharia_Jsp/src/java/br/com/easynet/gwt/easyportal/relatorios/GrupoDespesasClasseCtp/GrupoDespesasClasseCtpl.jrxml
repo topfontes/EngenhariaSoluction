@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="547" leftMargin="29" rightMargin="19" topMargin="29" bottomMargin="29">
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="empreendimento" class="java.lang.String"/>
+	<parameter name="localizacao" class="java.lang.String"/>
+	<parameter name="referencia1" class="java.lang.String"/>
+	<parameter name="referencia2" class="java.lang.String"/>
+	<parameter name="sequencia" class="java.lang.String"/>
+	<parameter name="pathlogoSistema" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{pathlogoSistema}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logoCliente" class="java.lang.Object"/>
+	<parameter name="subClasse" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="peso" class="java.lang.Double">
+		<fieldDescription><![CDATA[peso]]></fieldDescription>
+	</field>
+	<field name="plc_nr_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[plc_nr_id]]></fieldDescription>
+	</field>
+	<field name="plc_tx_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[plc_tx_nome]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[total]]></fieldDescription>
+	</field>
+	<field name="valor_Apagar" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_Apagar]]></fieldDescription>
+	</field>
+	<field name="valor_pago" class="java.lang.Double">
+		<fieldDescription><![CDATA[valor_pago]]></fieldDescription>
+	</field>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA["1"]]></variableExpression>
+	</variable>
+	<variable name="vlPago" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="sumvlApagar" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_Apagar}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="sumTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="sumPeso" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="784" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="547" height="784" forecolor="#0066FF"/>
+				<graphicElement>
+					<pen lineWidth="6.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="772" width="547" height="7" forecolor="#FFFFFF" backcolor="#0066FF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BCCONTROL - SISTEMA PARA CONTROLADORIA DE CUSTOS DA BC ENGENHARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="777" width="547" height="7" forecolor="#FFFFFF" backcolor="#0066FF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[BC ENGENHARIA DE CUSTOS LTDA ME - CNPJ 11.293.236/0001-80 - Rua Nestor Sampaio n° 140. Térrio - Bairro Luzia - CEP 49.045-000 - Aracaju -Sergipe -(79)3243 6655]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="3" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="63" width="89" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMPREENDIMENTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="74" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="85" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[LOCALIZAÇÃO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="95" width="63" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[EMITIDO EM:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="63" width="307" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{empreendimento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="85" width="439" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{localizacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="37" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{referencia2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="25" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sequencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="74" width="307" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="15" y="15" width="44" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{pathlogoSistema}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="480" y="15" width="44" height="44"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="104" y="95" width="100" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="12" width="413" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement x="16" y="2" width="510" height="31" backcolor="#FFFF00"/>
+			</rectangle>
+			<textField>
+				<reportElement x="21" y="13" width="100" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{subClasse}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="317" y="2" width="1" height="31"/>
+			</line>
+			<line>
+				<reportElement x="375" y="2" width="1" height="31"/>
+			</line>
+			<line>
+				<reportElement x="431" y="2" width="1" height="31"/>
+			</line>
+			<line>
+				<reportElement x="491" y="2" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement x="331" y="13" width="42" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[PAGOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="13" width="38" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[A PAGAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="3" width="54" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CUSTOS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="13" width="32" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[PESO %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="12" width="54" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[PAGOS +]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="21" width="54" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[A PAGAR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement x="17" y="0" width="509" height="11" forecolor="#FFFFFF" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(($V{contador}.intValue())%2).equals(new Integer("0")))]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<line>
+				<reportElement x="431" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="375" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement mode="Transparent" x="317" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement x="16" y="0" width="1" height="11"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="497" y="1" width="25" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="434" y="1" width="55" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="325" y="1" width="48" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valor_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="22" y="1" width="285" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{plc_tx_nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="525" y="0" width="1" height="11"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="380" y="1" width="47" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valor_Apagar}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="317" y="0" width="1" height="11"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="15" y="1" width="508" height="12" forecolor="#FFFFFF" backcolor="#FFFF00"/>
+			</rectangle>
+			<line>
+				<reportElement x="375" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="431" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="525" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement x="16" y="12" width="510" height="1"/>
+			</line>
+			<line>
+				<reportElement x="16" y="0" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement x="102" y="0" width="100" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="324" y="1" width="49" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vlPago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="380" y="1" width="47" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumvlApagar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="434" y="1" width="55" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumTotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="495" y="1" width="27" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumPeso}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="317" y="0" width="1" height="12"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
