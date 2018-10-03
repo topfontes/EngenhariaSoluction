@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <context-param>
+        <description>Cor de Contorno para o Menu</description>
+        <param-name>corContorno</param-name>
+        <param-value>#000000</param-value>
+    </context-param>
+    <context-param>
+        <description>Cor padrÃ£o do Menu</description>
+        <param-name>corPadrao</param-name>
+        <param-value>#FFFFFF</param-value>
+    </context-param>
+    <context-param>
+        <description>Cor para o menu quando selecionado</description>
+        <param-name>corSelecionado</param-name>
+        <param-value>#FFFFFF</param-value>
+    </context-param>
+    <context-param>
+        <description>Cor do texto para o menu</description>
+        <param-name>corTexto</param-name>
+        <param-value>#000000</param-value>
+    </context-param>
+
+    <!--context-param>
+        <description>Url para acessar o banco do portal</description>
+        <param-name>urljdbc</param-name>
+        <param-value>jdbc:postgresql://pgsql.web10.eti.br:5432/web10</param-value>
+    </context-param>
+    <context-param>
+        <description>usuÃ¡rio do banco portal</description>
+        <param-name>userjdbc</param-name>
+        <param-value>web10</param-value>
+    </context-param>
+    <context-param>
+        <param-name>passwordjdbc</param-name>
+        <param-value>web102008</param-value>
+    </context-param-->
+
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>autentication.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
