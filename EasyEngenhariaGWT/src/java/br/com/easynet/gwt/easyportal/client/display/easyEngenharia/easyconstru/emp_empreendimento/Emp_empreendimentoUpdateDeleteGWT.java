@@ -51,6 +51,7 @@ import java.util.List;
 public class Emp_empreendimentoUpdateDeleteGWT extends UpdateDeleteGWT implements IListenetResponse {
 
     public static final String PAGE = "easyEngenharia/easyconstru/emp_empreendimento/emp_empreendimentoUpdateDeleteGWT.jsp";
+    
     private TextField<String> emp_nr_id = new TextField<String>();
     private TextField<String> emp_tx_nome = new TextField<String>();
     private TextField<String> emp_tx_endereco = new TextField<String>();
@@ -122,6 +123,7 @@ public class Emp_empreendimentoUpdateDeleteGWT extends UpdateDeleteGWT implement
         formSubmit.setEncoding(FormPanel.Encoding.MULTIPART);
         formSubmit.setAction(Constantes.URL + PAGE);
         formSubmit.setMethod(FormPanel.Method.POST);
+        
         formSubmit.addListener(Events.Submit, new Listener<FormEvent>() {
 
             public void handleEvent(FormEvent be) {
@@ -254,7 +256,8 @@ public class Emp_empreendimentoUpdateDeleteGWT extends UpdateDeleteGWT implement
             formSubmit.layout();
 
             formSubmit.submit();
-            Window.alert("chegou");
+           
+            Window.alert(formSubmit.getAction()+formSubmit.getFields());
 
 
         } catch (Exception ex) {

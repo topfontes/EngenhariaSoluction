@@ -5,9 +5,10 @@ import java.sql.*;
 import br.com.easynet.database.DataSet;
 import br.com.easynet.database.ItemDS;
 import br.com.easynet.database.RowDS;
+import br.com.easynet.gwt.easyportal.jb.Funcoes;
 import br.com.jdragon.dao.*;
 import br.com.easynet.gwt.easyportal.transfer.*;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+//import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -359,34 +360,34 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
         }
     }
 
-    public void corrigirCaracter(DataSet ds) throws Exception{
+    public void corrigirCaracter(DataSet ds) throws Exception {
         int contator = 0;
         try {
             if (ds != null) {
-                
+
                 for (int i = 0; i < ds.getList().size(); i++) {
                     RowDS row = ds.getList().get(i);
                     List<ItemDS> items = row.getRow();
                     for (int j = 0; j < items.size(); j++) {
                         ItemDS item = items.get(j);
                         contator++;
-                        if(contator == 948){
+                        if (contator == 948) {
                             int inicio = 0;
                         }
                         if (item.getName().equalsIgnoreCase("ctp_tx_fornecedor") || item.getName().equalsIgnoreCase("ctp_nr_documento") || item.getName().equalsIgnoreCase("ctp_tx_obs")) {
                             Object ob = item.getValue();
-                            if(ob != null ){
-                                if(item.getValue().toString().indexOf("CARTORIO 1")!= -1 ){
-                                   String a ="a";
+                            if (ob != null) {
+                                if (item.getValue().toString().indexOf("CARTORIO 1") != -1) {
+                                    String a = "a";
                                 }
-                              item.setValue(getValueSemAspas(item.getValue().toString()));
+                                item.setValue(getValueSemAspas(item.getValue().toString()));
                             }
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            System.out.println("contator "+contator);
+            System.out.println("contator " + contator);
             throw e;
         }
 
@@ -691,6 +692,27 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
         }
     }
 
+    public TreeMap<String, Ctp_conta_pagarT> getByObr_nr_idTreeAdmxls(Ctp_conta_pagarT ctp_conta_pagarT) throws Exception {
+        PreparedStatement pStmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from easyconstru.ctp_conta_pagar where  obr_nr_id = ? and ctp_tx_status=? order by ctp_nr_ano, ctp_nr_mes";
+            pStmt = con.prepareStatement(sql);
+            pStmt.setObject(1, ctp_conta_pagarT.getObr_nr_id());
+            pStmt.setObject(2, ctp_conta_pagarT.getCtp_tx_status());
+            rs = pStmt.executeQuery();
+            return resultSetToObjectTransferTreeAdmXLS(rs);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                pStmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
     public TreeMap<String, Ctp_conta_pagarT> getByObr_nr_idMesAnoTree(Ctp_conta_pagarT ctp_conta_pagarT) throws Exception {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
@@ -718,6 +740,7 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         try {
+
             String sql = "select * from easyconstru.ctp_conta_pagar where  obr_nr_id = ? and ctp_tx_status=? ";//and ctp_tx_obs is not null";
             pStmt = con.prepareStatement(sql);
             pStmt.setObject(1, ctp_conta_pagarT.getObr_nr_id());
@@ -741,6 +764,9 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
             TreeMap<String, Ctp_conta_pagarT> objs = new TreeMap<String, Ctp_conta_pagarT>();
             while (rs.next()) {
                 cont++;
+                if (cont == 947) {
+                    int w = 1;
+                }
                 Ctp_conta_pagarT ctp_conta_pagarT = new Ctp_conta_pagarT();
                 ctp_conta_pagarT.setCtp_nr_id(rs.getInt("ctp_nr_id"));
                 ctp_conta_pagarT.setCtp_tx_fornecedor(rs.getString("ctp_tx_fornecedor"));
@@ -752,7 +778,7 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
                 ctp_conta_pagarT.setObr_nr_id(rs.getInt("obr_nr_id"));
 
                 String obs = rs.getString("ctp_tx_obs");
-                if (!objs.isEmpty()) {
+                if (obs != null && !obs.isEmpty()) {
                     obs = getValueSemAspas(obs);
                 }
 
@@ -760,7 +786,9 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
                 ctp_conta_pagarT.setCtp_dt_vencimento(rs.getDate("ctp_dt_vencimento"));
                 ctp_conta_pagarT.setCtp_dt_emissao(rs.getDate("ctp_dt_emissao"));
                 String key = ctp_conta_pagarT.getCtp_tx_obs();
-                objs.put(key, ctp_conta_pagarT);
+                if (obs != null && !obs.isEmpty()) {
+                    objs.put(key, ctp_conta_pagarT);
+                }
             }
             return objs;
         } catch (Exception e) {
@@ -788,9 +816,33 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
             ctp_conta_pagarT.setCtp_dt_emissao(rs.getDate("ctp_dt_emissao"));
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String key = ctp_conta_pagarT.getCtp_nr_documento() + "." + sdf.format(ctp_conta_pagarT.getCtp_dt_vencimento());
-
             i++;
+            objs.put(key, ctp_conta_pagarT);
 
+        }
+        return objs;
+    }
+
+    private TreeMap<String, Ctp_conta_pagarT> resultSetToObjectTransferTreeAdmXLS(ResultSet rs) throws Exception {
+        TreeMap<String, Ctp_conta_pagarT> objs = new TreeMap<String, Ctp_conta_pagarT>();
+        int i = 1;
+        while (rs.next()) {
+            Ctp_conta_pagarT ctp_conta_pagarT = new Ctp_conta_pagarT();
+            ctp_conta_pagarT.setCtp_nr_id(rs.getInt("ctp_nr_id"));
+            ctp_conta_pagarT.setCtp_tx_fornecedor(rs.getString("ctp_tx_fornecedor"));
+            ctp_conta_pagarT.setCtp_nr_mes(rs.getInt("ctp_nr_mes"));
+            ctp_conta_pagarT.setPlc_nr_id(rs.getInt("plc_nr_id"));
+            ctp_conta_pagarT.setCtp_nr_valor(rs.getFloat("ctp_nr_valor"));
+            ctp_conta_pagarT.setCtp_nr_documento(rs.getString("ctp_nr_documento"));
+            ctp_conta_pagarT.setCtp_tx_status(rs.getString("ctp_tx_status"));
+            ctp_conta_pagarT.setObr_nr_id(rs.getInt("obr_nr_id"));
+            ctp_conta_pagarT.setCtp_tx_obs(rs.getString("ctp_tx_obs"));
+            ctp_conta_pagarT.setCtp_dt_vencimento(rs.getDate("ctp_dt_vencimento"));
+            ctp_conta_pagarT.setCtp_dt_emissao(rs.getDate("ctp_dt_emissao"));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            String key = ctp_conta_pagarT.getCtp_nr_documento() + "." + sdf.format(ctp_conta_pagarT.getCtp_dt_vencimento()) + "." + Funcoes.FormatoMoedaBR_Double(ctp_conta_pagarT.getCtp_nr_valor());
+            i++;
             objs.put(key, ctp_conta_pagarT);
 
         }
@@ -1217,4 +1269,47 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
     public void setArquivo_engeb(boolean arquivo_engeb) {
         this.arquivo_engeb = arquivo_engeb;
     }
+
+    public TreeMap<Integer, Double> getCustoRealizadoAcumuladoAgrupadoSubClasseBI(int obr_nr_id, int mes, int ano, String status) throws Exception {
+        /* 1095 */ PreparedStatement pStmt = null;
+        /* 1096 */ ResultSet rs = null;
+        /*      */ try {
+            /* 1098 */ double valor = 0.0D;
+            /* 1099 */ StringBuffer sql = new StringBuffer();
+            /*      */
+ /* 1101 */ sql.append("select plc_nr_id, sum(ctp.ctp_nr_valor) as valor from easyconstru.ctp_conta_pagar as ctp");
+            /*      */
+ /* 1103 */ sql.append(" where ctp.obr_nr_id =? and ((ctp_nr_mes <=? and ctp_nr_ano = ?) or ctp_nr_ano <?) ");
+            /* 1104 */ sql.append(" and ctp.ctp_tx_status =? group by plc_nr_id");
+            /*      */
+ /* 1106 */ pStmt = this.con.prepareStatement(sql.toString());
+            /* 1107 */ pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+            /* 1108 */ pStmt.setObject(2, Integer.valueOf(mes));
+            /* 1109 */ pStmt.setObject(3, Integer.valueOf(ano));
+            /* 1110 */ pStmt.setObject(4, Integer.valueOf(ano));
+            /* 1111 */ pStmt.setObject(5, status);
+            /* 1112 */ rs = pStmt.executeQuery();
+            /*      */
+ /* 1114 */ return resultSetToObjectTransferTreeBI(rs);
+            /*      */        } /*      */ catch (Exception e) /*      */ {
+            /* 1118 */ throw e;
+            /*      */        } finally {
+            /*      */ try {
+                /* 1121 */ pStmt.close();
+                /* 1122 */ rs.close();
+                /*      */            } /*      */ catch (Exception localException2) {
+            }
+            /*      */        }
+        /*      */    }
+
+    private TreeMap<Integer, Double> resultSetToObjectTransferTreeBI(ResultSet rs) throws Exception {
+        /*  773 */ TreeMap<Integer, Double> objs = new TreeMap();
+        /*  774 */ int i = 1;
+        /*  775 */ while (rs.next()) {
+            /*  776 */ objs.put(Integer.valueOf(rs.getInt("plc_nr_id")), Double.valueOf(rs.getDouble("valor")));
+            /*      */        }
+        /*  778 */ return objs;
+        /*      */    }
+    /*      */
+
 }

@@ -765,4 +765,32 @@ public class Est_estoqueDAO extends ObjectDAO {
             }
         }
     }
+    public java.util.TreeMap<Integer, Double> getBySubClasseTreeBI(int obr_nr_id, int mes, int ano) throws Exception
+/*     */   {
+/* 558 */     PreparedStatement pStmt = null;
+/* 559 */     ResultSet rs = null;
+/*     */     try {
+/* 561 */       String sql = "select plc_nr_id, sum(est_nr_vl_total) as est_nr_vl_total from easyconstru.est_estoque where  obr_nr_id = ? and ((est_nr_mes <=? and est_nr_ano = ?) or est_nr_ano <?) group by plc_nr_id";
+/* 562 */       pStmt = this.con.prepareStatement(sql);
+/* 563 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 564 */       pStmt.setObject(2, Integer.valueOf(mes));
+/* 565 */       pStmt.setObject(3, Integer.valueOf(ano));
+/* 566 */       pStmt.setObject(4, Integer.valueOf(ano));
+/* 567 */       rs = pStmt.executeQuery();
+/*     */       
+/* 569 */       java.util.TreeMap<Integer, Double> tree = new java.util.TreeMap();
+/* 570 */       while (rs.next()) {
+/* 571 */         tree.put(Integer.valueOf(rs.getInt("plc_nr_id")), Double.valueOf(rs.getDouble("est_nr_vl_total")));
+/*     */       }
+/* 573 */       return tree;
+/*     */     } catch (Exception e) {
+/* 575 */       throw e;
+/*     */     } finally {
+/*     */       try {
+/* 578 */         rs.close();
+/* 579 */         pStmt.close();
+/*     */       }
+/*     */       catch (Exception localException2) {}
+/*     */     }
+/*     */   }
 }

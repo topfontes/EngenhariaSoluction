@@ -573,4 +573,30 @@ public class Pms_planilha_medicao_servicoDAO extends ObjectDAO {
             }
         }
     }
+   public java.util.TreeMap<Integer, Double> getByQtdeAcumuladaSubClasseBI(int obr_nr_id, int mes, int ano) throws Exception
+/*     */   {
+/* 224 */     PreparedStatement pStmt = null;
+/* 225 */     ResultSet rs = null;
+/*     */     try {
+/* 227 */       StringBuffer buffer = new StringBuffer();
+/* 228 */       buffer.append("select plc_nr_id, sum(custo_medido) valor from bi.pms  where obr_nr_id =? and ((mes<=? and ano=?) or ano<?) group by 1");
+/*     */       
+/* 230 */       pStmt = this.con.prepareStatement(buffer.toString());
+/*     */       
+/* 232 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 233 */       pStmt.setObject(2, Integer.valueOf(mes));
+/* 234 */       pStmt.setObject(3, Integer.valueOf(ano));
+/* 235 */       pStmt.setObject(4, Integer.valueOf(ano));
+/* 236 */       rs = pStmt.executeQuery();
+/* 237 */       java.util.TreeMap<Integer, Double> obj = new java.util.TreeMap();
+/* 238 */       while (rs.next()) {
+/* 239 */         obj.put(Integer.valueOf(rs.getInt("plc_nr_id")), Double.valueOf(rs.getDouble("valor")));
+/*     */       }
+/* 241 */       java.util.TreeMap<Integer, Double> localTreeMap1 = obj;return localTreeMap1;
+/*     */     } catch (Exception e) {
+/* 243 */       e = e;
+/* 244 */       throw e;
+/*     */     }
+/*     */     finally {}
+/*     */   }
 }

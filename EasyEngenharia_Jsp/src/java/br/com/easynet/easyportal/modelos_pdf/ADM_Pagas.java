@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -33,10 +34,12 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
         super(ctp_conta_pagarT, cdao, is);
     }
 
-    public void povoaConta() {
+    public void povoaConta() throws Exception {
         try {
-            treeConta = ctp_conta_pagarDAO.getByObr_nr_idTree(this.ctp_conta_pagarT);
+            treeConta = ctp_conta_pagarDAO.getByObr_nr_idTreeEngeb(this.ctp_conta_pagarT);
+            int a = 2;
         } catch (Exception e) {
+            throw e;
         }
     }
 
@@ -47,9 +50,25 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
             String vl = parte.substring(posInidoc, parte.length()).trim();
             try {
                 int a = Integer.parseInt(vl);
-                return parte.substring(posInidoc, parte.length()).trim();
+
+                return getClearCaracterToString(parte.substring(posInidoc, parte.length()).trim(), "%");
             } catch (Exception e) {
                 posInidoc = posIniVal;
+                if (parte.indexOf("CH ") > 0) {
+                    int p = parte.indexOf("CH ");
+                    int c = 0;
+                    for (int i = p; i < parte.length(); i++) {
+                        String v = parte.substring(i, i + 1);
+                        if (v.equalsIgnoreCase(" ")) {
+                            c++;
+                            if (c == 2) {
+                                return parte.substring(p, i);
+                            }
+                        }
+
+                    }
+
+                }
                 return "";
             }
 
@@ -57,6 +76,30 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
             return "";
         }
 
+    }
+
+    public String getClearCaracterToString(String valor, String caracter) {
+        if (valor.trim().indexOf(caracter) > 0) {
+            for (int i = valor.trim().indexOf(caracter); i > 0; i--) {
+                String l = valor.substring(i - 1, i);
+                if (l.equals(" ")) {
+                    if (i > 3) {
+                        return valor.substring(0, i);
+                    }
+                }
+            }
+        }
+        return valor;
+    }
+
+    public String getClearDateToString(String valor) {
+        if (valor.indexOf(" ") > 0) {
+            String vl = valor.substring(0, valor.indexOf(" "));
+            if (dataValida(vl)) {
+                return valor.substring(valor.indexOf(" "), valor.length());
+            }
+        }
+        return valor;
     }
 
     public String getVencimento() {
@@ -67,13 +110,21 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
         String vl = linha.substring(posIniVal, linha.length());
         vl = vl.replace(".", "");
         vl = vl.replace(",", ".");
+        if (vl.indexOf("(") > -1) {
+            if (vl.indexOf(")") > -1) {
+                vl = vl.replace("(", "");
+                vl = vl.replace(")", "");
+                vl = "-" + vl;
+            }
+        }
         return Float.parseFloat(vl);
     }
 
     public String getFornecedor() {
         try {
-
-            return linha.substring(linha.indexOf(" "), posInidoc);
+            String vl = getClearCaracterToString(linha.trim().substring(linha.indexOf(" "), posInidoc), "%");
+            vl = getClearDateToString(vl);
+            return vl;
 
         } catch (Exception e) {
 
@@ -86,27 +137,32 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
     }
 
     public boolean valorValido() {
+        String vl = "";
         try {
             posIniVal = posLastCaracter(linha, " ");
-            String vl = linha.substring(posIniVal, linha.length());
+            vl = linha.substring(posIniVal, linha.length());
             if (vl.indexOf(",") > -1) {
                 vl = vl.replace(".", "");
                 vl = vl.replace(",", ".");
-                float vlf = Float.parseFloat(vl);
+                vl = vl.replace("(", "");
+                vl = vl.replace(")", "");
+                float vlf = Float.parseFloat(vl.trim());
                 return true;
             }
             return false;
         } catch (Exception e) {
+
         }
         return false;
     }
 
     public String read() {
-        povoaConta();
+
         File file = null;
         int lin = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
+            povoaConta();
             list = new Vector();
             ConverPDFString converPDFString = new ConverPDFString();
 
@@ -147,29 +203,45 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
                         System.out.println("A pagar  exception " + lin + "  " + linha);
                         //continue; 
                     }
-                    if (lin == 227) {
+                    if (lin == 264) {
                         int a = 0;
                     }
                     System.out.println("A pagar " + lin + "  " + linha);
                     if (dataValida(campo)) {
                         datapreenchida = true;
-
-                        vencimento = sdf.parse(campo);
+                        String dtStr = campo.trim().length() > 7 ? campo : "01/" + campo;
+                        vencimento = sdf.parse(dtStr);
                         if (valorValido()) {
 
                             valor = getValor();
                             total += valor;
-                            documento = getDocumento().trim();
+                            try {
+                                documento = getDocumento().trim();
+                            } catch (Exception exception) {
+                                documento = "SD";
+                            }
                             fornecedor = getFornecedor().trim();
-                            String key = documento + "." + sdf.format(vencimento);
-                            if (treeConta.get(key) == null) {
-                                addObjectCTP(fornecedor, documento, vencimento, valor, hist);
+                            documento = documento.trim().isEmpty() ? "SD" : documento;
+                            if (documento.indexOf("%") > -1) {
+                                documento = "SD";
+                            }
+                            StringBuffer key = new StringBuffer().append(documento.trim()).append(".").append(sdf.format(vencimento));
+                            key.append(".").append(fornecedor.trim()).append(".").append(Float.toString(valor));
+                            String keyStr = ctp_conta_pagarDAO.getValueSemAspas(key.toString());
+                            if (keyStr.length() > 299) {
+                                keyStr = keyStr.substring(0, 299).trim();
+                            }
+                            if (treeConta.get(keyStr.toString()) == null) {
+                                addObjectCTP(fornecedor.trim(), documento.trim(), vencimento, valor, key.toString().trim());
                                 System.out.println(" insert");
                             }
                             datapreenchida = false;
                         } else {
                             fornecedor = linha.substring(0, linha.length());
+                            fornecedor = getClearCaracterToString(fornecedor, "%");
+                            fornecedor = getClearDateToString(fornecedor);
                         }
+
 //                        System.out.println("A pagar " + lin + "  " + linha);
                     } else {
                         if (datapreenchida) {
@@ -177,12 +249,22 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
                                 valor = getValor();
                                 total += valor;
                                 try {
-                                    documento = linha.substring(0, posIniVal);
+                                    documento = getClearCaracterToString(linha.substring(0, posIniVal), "%");
+                                    documento = documento.trim().isEmpty() ? "SD" : documento;
                                 } catch (Exception e) {
                                 }
-                                String key = documento + "." + sdf.format(vencimento);
-                                if (treeConta.get(key) == null) {
-                                    addObjectCTP(fornecedor, documento, vencimento, valor, hist);
+                                documento = documento.trim().isEmpty() ? "SD" : documento;
+                                if (documento.indexOf("%") > -1) {
+                                    documento = "SD";
+                                }
+                                StringBuffer key = new StringBuffer().append(documento.trim()).append(".").append(sdf.format(vencimento));
+                                key.append(".").append(fornecedor.trim()).append(".").append(Float.toString(valor));
+                                String keyStr = ctp_conta_pagarDAO.getValueSemAspas(key.toString());
+                                if (keyStr.length() > 299) {
+                                    keyStr = keyStr.substring(0, 299).trim();
+                                }
+                                if (treeConta.get(keyStr.trim()) == null) {
+                                    addObjectCTP(fornecedor.trim(), documento.trim(), vencimento, valor, key.toString().trim());
                                     System.out.println(" insert");
                                 }
                                 datapreenchida = false;
@@ -197,15 +279,22 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
             String a = "s";
             br.close();
             fr.close();
-            dao.commitTransaction();
+                dao.commitTransaction();
             return "Total Geral lido = R$" + funcoes.FormatoMoedaBR_Double(total) + " Total Importados = R$" + funcoes.FormatoMoedaBR_Double(totalImp);
         } catch (Exception e) {
             dao.rollbackTransaction();
             e.printStackTrace();
             return "Erro na leitura do arquivo na linha " + lin + ", " + linha;
         } finally {
-            file.delete();
-            dao.close();
+            try {
+                file.delete();
+            } catch (Exception e) {
+            }
+            try {
+                dao.close();
+            } catch (Exception e) {
+            }
+
         }
 
         /*        String valor;
@@ -287,6 +376,18 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
             return true;
         } catch (Exception e) {
+            if (data.trim().length() == 5) {
+                if (data.indexOf("/") == 2) {
+                    data = "01/" + data;
+                    try {
+                        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                        return true;
+                    } catch (Exception ex) {
+                    }
+                    //return false;
+
+                }
+            }
             return false;
         }
     }

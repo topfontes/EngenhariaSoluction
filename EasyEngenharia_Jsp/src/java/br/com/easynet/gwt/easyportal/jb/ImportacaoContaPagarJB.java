@@ -9,12 +9,14 @@ import br.com.easynet.easyportal.modelos_pdf.AC_APagarXls;
 import br.com.easynet.easyportal.modelos_pdf.AC_Pagas;
 import br.com.easynet.easyportal.modelos_pdf.ADM_Apagar;
 import br.com.easynet.easyportal.modelos_pdf.ADM_Pagas;
+import br.com.easynet.easyportal.modelos_pdf.AdmXlsPagas;
 import br.com.easynet.easyportal.modelos_pdf.CeliPagasXLS;
 import br.com.easynet.easyportal.modelos_pdf.Celi_ApagarXLS;
 import br.com.easynet.easyportal.modelos_pdf.DiconAPagarXls;
 import br.com.easynet.easyportal.modelos_pdf.DiconPagas;
 import br.com.easynet.easyportal.modelos_pdf.EngebAPagarXLS;
 import br.com.easynet.easyportal.modelos_pdf.EngebPagasXLS;
+import br.com.easynet.easyportal.modelos_pdf.LMarquezzoAPagarXLS;
 import br.com.easynet.easyportal.modelos_pdf.LMarquezzoPagasXLS;
 import br.com.easynet.easyportal.modelos_pdf.MarquezzoAPagar;
 import br.com.easynet.easyportal.modelos_pdf.MarquezzoPagas;
@@ -132,6 +134,8 @@ public class ImportacaoContaPagarJB extends SystemBase implements INotSecurity {
                     if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("A")) {
                         MarquezzoAPagar marquezzo = new MarquezzoAPagar(ctp_conta_pagarT, cdao, bais);
                         setMsg(marquezzo.read());
+                        System.out.println("ok");
+
                     } else {
                         MarquezzoPagas marquezzoPagas = new MarquezzoPagas(ctp_conta_pagarT, cdao, bais);
                         setMsg(marquezzoPagas.read());
@@ -213,6 +217,20 @@ public class ImportacaoContaPagarJB extends SystemBase implements INotSecurity {
                     } else {
                         ADM_Pagas admapagar = new ADM_Pagas(ctp_conta_pagarT, cdao, bais);
                         setMsg(admapagar.read());
+                    }
+                    break;
+                }
+                case 14: {
+                    if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("A")) {
+                        LMarquezzoAPagarXLS lMarquezzoAPagarXLS = new LMarquezzoAPagarXLS(ctp_conta_pagarT, cdao, bais);
+                        setMsg(lMarquezzoAPagarXLS.read());
+                    }
+                    break;
+                }
+                case 15: {
+                    if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("P")) {
+                        AdmXlsPagas adm = new AdmXlsPagas(ctp_conta_pagarT, cdao, bais);
+                        setMsg(adm.read());
                     }
                     break;
                 }

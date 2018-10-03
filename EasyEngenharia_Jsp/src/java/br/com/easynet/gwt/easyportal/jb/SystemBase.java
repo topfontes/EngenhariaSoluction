@@ -26,6 +26,9 @@ public class SystemBase extends EasySecurityJB {
     public final String PATH_WEB = "/tmp/";
 //    public final String PATH_WEB = "/home/bcengcustos/engenharia";
     public final String PATH_LOCAL = "C:/temp/";
+    protected int obr_nr_id;
+    protected int mes;
+    protected int ano;
 
     @Override
     public void pageLoad() throws Exception {
@@ -1336,5 +1339,196 @@ public class SystemBase extends EasySecurityJB {
             close();
         }
         return null;
+    }
+
+    public br.com.easynet.gwt.easyportal.dao.Com_comenrcialDAO getCom_comenrcialDAO()
+            /*      */ throws Exception /*      */ {
+        /* 1431 */ this.dao = getDAO();
+        /* 1432 */ return new br.com.easynet.gwt.easyportal.dao.Com_comenrcialDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.dao.Csg_curva_s_geralDAO getCsg_curva_s_geralDAO() throws Exception /*      */ {
+        /* 1437 */ this.dao = getDAO();
+        /* 1438 */ return new br.com.easynet.gwt.easyportal.dao.Csg_curva_s_geralDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.dao.Idc_indice_custoDAO getIdc_indice_custoDAO() throws Exception /*      */ {
+        /* 1443 */ this.dao = getDAO();
+        /* 1444 */ return new br.com.easynet.gwt.easyportal.dao.Idc_indice_custoDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.dao.Inp_indicador_planejamentoDAO getInp_indicador_planejamentoDAO() throws Exception /*      */ {
+        /* 1449 */ this.dao = getDAO();
+        /* 1450 */ return new br.com.easynet.gwt.easyportal.dao.Inp_indicador_planejamentoDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.dao.Rep_resumo_planejamentoDAO getRep_resumo_planejamentoDAO() throws Exception /*      */ {
+        /* 1455 */ this.dao = getDAO();
+        /* 1456 */ return new br.com.easynet.gwt.easyportal.dao.Rep_resumo_planejamentoDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.dao.Ret_restricao_planejamentoDAO getRet_restricao_planejamentoDAO() throws Exception /*      */ {
+        /* 1461 */ this.dao = getDAO();
+        /* 1462 */ return new br.com.easynet.gwt.easyportal.dao.Ret_restricao_planejamentoDAO(this.dao);
+        /*      */    }
+
+    /*      */
+ /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.transfer.Com_comenrcialT findbyIdCom_comenrcial(br.com.easynet.gwt.easyportal.transfer.Com_comenrcialT com_comenrcialT)
+            /*      */ throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1471 */ br.com.easynet.gwt.easyportal.dao.Com_comenrcialDAO com_comenrcialDAO = getCom_comenrcialDAO();
+            /*      */
+ /* 1473 */ List<br.com.easynet.gwt.easyportal.transfer.Com_comenrcialT> listTemp = com_comenrcialDAO.getByPK(com_comenrcialT);
+            /*      */
+ /* 1475 */ return listTemp.size() > 0 ? (br.com.easynet.gwt.easyportal.transfer.Com_comenrcialT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1477 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1479 */ close();
+            /*      */        }
+        /* 1481 */ return null;
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.transfer.Csg_curva_s_geralT findbyIdCsg_curva_s_geral(br.com.easynet.gwt.easyportal.transfer.Csg_curva_s_geralT csg_curva_s_geralT) throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1488 */ br.com.easynet.gwt.easyportal.dao.Csg_curva_s_geralDAO csg_curva_s_geralDAO = getCsg_curva_s_geralDAO();
+            /*      */
+ /* 1490 */ List<br.com.easynet.gwt.easyportal.transfer.Csg_curva_s_geralT> listTemp = csg_curva_s_geralDAO.getByPK(csg_curva_s_geralT);
+            /*      */
+ /* 1492 */ return listTemp.size() > 0 ? (br.com.easynet.gwt.easyportal.transfer.Csg_curva_s_geralT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1494 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1496 */ close();
+            /*      */        }
+        /* 1498 */ return null;
+        /*      */    }
+
+    /*      */
+ /*      */ public Idc_indice_custoT findbyIdIdc_indice_custo(Idc_indice_custoT idc_indice_custoT) throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1505 */ br.com.easynet.gwt.easyportal.dao.Idc_indice_custoDAO idc_indice_custoDAO = getIdc_indice_custoDAO();
+            /*      */
+ /* 1507 */ List<Idc_indice_custoT> listTemp = idc_indice_custoDAO.getByPK(idc_indice_custoT);
+            /*      */
+ /* 1509 */ return listTemp.size() > 0 ? (Idc_indice_custoT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1511 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1513 */ close();
+            /*      */        }
+        /* 1515 */ return null;
+        /*      */    }
+
+    /*      */
+ /*      */ public Inp_indicador_planejamentoT findbyIdInp_indicador_planejamento(Inp_indicador_planejamentoT inp_indicador_planejamentoT) throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1522 */ br.com.easynet.gwt.easyportal.dao.Inp_indicador_planejamentoDAO inp_indicador_planejamentoDAO = getInp_indicador_planejamentoDAO();
+            /*      */
+ /* 1524 */ List<Inp_indicador_planejamentoT> listTemp = inp_indicador_planejamentoDAO.getByPK(inp_indicador_planejamentoT);
+            /*      */
+ /* 1526 */ return listTemp.size() > 0 ? (Inp_indicador_planejamentoT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1528 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1530 */ close();
+            /*      */        }
+        /* 1532 */ return null;
+        /*      */    }
+
+    /*      */
+ /*      */ public br.com.easynet.gwt.easyportal.transfer.Rep_resumo_planejamentoT findbyIdRep_resumo_planejamento(br.com.easynet.gwt.easyportal.transfer.Rep_resumo_planejamentoT rep_resumo_planejamentoT) throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1539 */ br.com.easynet.gwt.easyportal.dao.Rep_resumo_planejamentoDAO rep_resumo_planejamentoDAO = getRep_resumo_planejamentoDAO();
+            /*      */
+ /* 1541 */ List<br.com.easynet.gwt.easyportal.transfer.Rep_resumo_planejamentoT> listTemp = rep_resumo_planejamentoDAO.getByPK(rep_resumo_planejamentoT);
+            /*      */
+ /* 1543 */ return listTemp.size() > 0 ? (br.com.easynet.gwt.easyportal.transfer.Rep_resumo_planejamentoT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1545 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1547 */ close();
+            /*      */        }
+        /* 1549 */ return null;
+        /*      */    }
+
+    /*      */
+ /*      */ public Ret_restricao_planejamentoT findbyIdRet_restricao_planejamento(Ret_restricao_planejamentoT ret_restricao_planejamentoT) throws Exception /*      */ {
+        /*      */ try /*      */ {
+            /* 1556 */ br.com.easynet.gwt.easyportal.dao.Ret_restricao_planejamentoDAO ret_restricao_planejamentoDAO = getRet_restricao_planejamentoDAO();
+            /*      */
+ /* 1558 */ List<Ret_restricao_planejamentoT> listTemp = ret_restricao_planejamentoDAO.getByPK(ret_restricao_planejamentoT);
+            /*      */
+ /* 1560 */ return listTemp.size() > 0 ? (Ret_restricao_planejamentoT) listTemp.get(0) : null;
+            /*      */        } catch (Exception e) {
+            /* 1562 */ e.printStackTrace();
+            /*      */        } finally {
+            /* 1564 */ close();
+            /*      */        }
+        /* 1566 */ return null;
+        /*      */    }
+
+    public br.com.easynet.gwt.easyportal.dao.Uso_usuario_obraDAO getUso_usuario_obraDAO()
+            throws Exception {
+        this.dao = getDAO();
+        return new br.com.easynet.gwt.easyportal.dao.Uso_usuario_obraDAO(this.dao);
+    }
+
+    public br.com.easynet.gwt.easyportal.dao.Ucl_usuario_clienteDAO getUcl_usuario_clienteDAO() throws Exception {
+        this.dao = getDAO();
+        return new br.com.easynet.gwt.easyportal.dao.Ucl_usuario_clienteDAO(this.dao);
+    }
+    public br.com.easynet.gwt.easyportal.dao.Pcl_plano_clienteDAO getPcl_plano_clienteDAO() throws Exception {
+        this.dao = getDAO();
+        return new br.com.easynet.gwt.easyportal.dao.Pcl_plano_clienteDAO(this.dao);
+    }
+
+    /**
+     * @return the obr_nr_id
+     */
+    public int getObr_nr_id() {
+        return obr_nr_id;
+    }
+
+    /**
+     * @param obr_nr_id the obr_nr_id to set
+     */
+    public void setObr_nr_id(int obr_nr_id) {
+        this.obr_nr_id = obr_nr_id;
+    }
+
+    /**
+     * @return the mes
+     */
+    public int getMes() {
+        return mes;
+    }
+
+    /**
+     * @param mes the mes to set
+     */
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    /**
+     * @return the ano
+     */
+    public int getAno() {
+        return ano;
+    }
+
+    /**
+     * @param ano the ano to set
+     */
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 }

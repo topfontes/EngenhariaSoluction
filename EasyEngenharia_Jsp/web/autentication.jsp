@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="latin1"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="autentication" class="br.com.easynet.easyportal.jb.AutenticationJB" scope="request"/>
 <jsp:setProperty name="autentication" property="*"/>
 <jsp:setProperty name="autentication" property="page" value="${pageContext}"/>
@@ -15,6 +16,26 @@ ${autentication.execute}
         <!--Fireworks CS3 Dreamweaver CS3 target.  Created Thu Jul 23 18:24:50 GMT-0300 (Hora oficial do Brasil) 2009-->
     </head>
     <body bgcolor="#ffffff" style="margin-left:0;margin-top:0">
+
+
+
+        <!--%
+            try {
+                request.setCharacterEncoding("UTF8");
+                response.setContentType("charset=utf-8");
+
+                out.println("<BR>*** title_text= <BR>" + request.getParameter("title_text"));
+                out.println("<BR>*** request.getCharacterEncoding()= " + request.getCharacterEncoding());
+                out.println("<BR>*** request.getContentType()= " + request.getContentType());
+                out.println("<BR>*** request.getLocale()= " + request.getLocale());
+                out.flush();
+            } catch (Exception ex) {
+                out.println("EXception occured: ");
+                ex.printStackTrace(new java.io.PrintWriter(out));
+                out.flush();
+                ex.printStackTrace();
+            }
+        %-->
         <table border="0" cellpadding="0" cellspacing="0" width="1024" align="center">
 
             <tr>
@@ -42,7 +63,7 @@ ${autentication.execute}
                             <tr>
                                 <td colspan="3" align="center">
                                     <h3>
-                                        <a href="loj_loja_UsuInsert.jsp">Não sou cadastrado. </a>
+                                        <a href="loj_loja_UsuInsert.jsp">NÃ£o sou cadastrado. </a>
                                     </h3>
 
                                 </td>

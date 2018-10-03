@@ -109,7 +109,6 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
 //        uploadField.setName("fto_fotosT.fto_bt_foto");
         //formPanel.add(uploadField);
 
-
         hdop.setName("op");
         hdop.setValue("insert");
         formPanel.add(hdop);
@@ -130,7 +129,6 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
             }
         });
 
-
         fileUpload = new FileUploadField() {
 
             @Override
@@ -148,6 +146,7 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
 
             }
         };
+
         //getCpMaster().setLayout(new TableLayout(1));
         ContentPanel contentPanel = new ContentPanel();
         contentPanel.setHeaderVisible(false);
@@ -247,6 +246,8 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
             hdNome.setValue(fto_tx_nome.getValue());
             formPanel.add(hdNome);
 
+            
+
             HiddenField<String> hdmes = new HiddenField<String>();
             hdmes.setName("fto_fotosT.fto_nr_mes");
             hdmes.setValue(cbMes.getValue().getValue() + "");
@@ -271,7 +272,6 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
                 }
             });
 
-
         } catch (Exception ex) {
         }
     }
@@ -287,7 +287,7 @@ public class Fto_fotosInsertGWT extends CadastroGWT implements IListenetResponse
                     image.setUrl("./teste");
                     layout();
                 } else {
-                   // Window.alert("Result " + jsonObject.get("resultado").toString());
+                    // Window.alert("Result " + jsonObject.get("resultado").toString());
                 }
             } else {
                 int altura = getCpMaster().getHeight() - 50;

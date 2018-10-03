@@ -37,7 +37,7 @@ public class MarquezzoAPagar extends SystemBase {
     private Ctp_conta_pagarDAO ctp_conta_pagarDAO;
     private static String linha;
     private InputStream is;
-        private int posDoc = 0;
+    private int posDoc = 0;
     private Funcoes funcoes = new Funcoes();
     DAOFactory dao;
     private double totalImp = 0;
@@ -92,13 +92,12 @@ public class MarquezzoAPagar extends SystemBase {
         if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("A")) {
             ctp_conta_pagarDAO.deleteAll(ctp_conta_pagarT);
 
-
         }
     }
 
     public void povoaConta() {
         try {
-            treeConta = ctp_conta_pagarDAO.getByObr_nr_idTree(this.ctp_conta_pagarT);
+            //treeConta = ctp_conta_pagarDAO.getByObr_nr_idTree(this.ctp_conta_pagarT);
         } catch (Exception e) {
         }
     }
@@ -116,7 +115,6 @@ public class MarquezzoAPagar extends SystemBase {
         String lintemp = linha;
         boolean achou = false;
         int p = 0;
-
 
         if (index > -1) {
             index = index + 3;
@@ -141,30 +139,23 @@ public class MarquezzoAPagar extends SystemBase {
                 }
             } while (!achou & index - lintemp.length() > 3);
 
-
-
             return achou;
-
-
 
         }
         return false;
-
 
     }
 
     public String getCodigo() {
         String cod = linha.substring(posDoc, linha.length()).trim();
         return cod;
-
-
     }
 
-    public String getFornecedor() {
-        return linha.substring(11, linha.length()).trim();
-
-
-    }
+//    public String getFornecedor() {
+//        return linha.substring(11, linha.length()).trim();
+//
+//    }
+    
 
     public boolean isVencimento() {
         boolean res = false;
@@ -191,35 +182,29 @@ public class MarquezzoAPagar extends SystemBase {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date date = sdf.parse(d1);
 
-
             return date;
-
 
         } catch (Exception e) {
         }
         return null;
-
 
     }
 
     public String getObs() {
         return linha.trim();
 
-
     }
 
     public String getObsValor() {
         int index = linha.indexOf("-");
 
-
         return linha.substring(index, linha.length()).trim();
-
 
     }
 
     public int posVirgula(String testo) {
         int p = 0;
-        for (int i = testo.length(); i> 0; i--) {
+        for (int i = testo.length(); i > 0; i--) {
             String l = testo.substring(i - 1, i);
             if (l.equalsIgnoreCase(",")) {
                 p = i;
@@ -228,13 +213,12 @@ public class MarquezzoAPagar extends SystemBase {
         }
         return p;
 
-
     }
 
     public int posEspaco() {
         int p = 0;
         //int pos_virgula = posVirgula();
-        for (int i = posVirgula; i> 0; i--) {
+        for (int i = posVirgula; i > 0; i--) {
             String l = linha.substring(i - 1, i);
             if (l.equalsIgnoreCase(" ")) {
                 p = i;
@@ -243,14 +227,13 @@ public class MarquezzoAPagar extends SystemBase {
         }
         return p;
 
-
     }
 
     public boolean isDocumento2() {
         try {
             boolean res = false;
-            if(linha.indexOf("/04/G,104/09") > -1){
-                int a= 0;
+            if (linha.indexOf("/04/G,104/09") > -1) {
+                int a = 0;
             }
 
             int duasVirgula = linha.indexOf(",,");
@@ -283,11 +266,24 @@ public class MarquezzoAPagar extends SystemBase {
                             posBarra = index - 3;
                         }
                     }
+                } else {
+                    barra = linha.substring(index - 4, index - 3);
+                    if (barra.equalsIgnoreCase("/")) {
+                        posBarra = index - 2;
+                        String nm = linha.substring(index - 5, index - 4).trim();
+                        if (TreeNumeros.get(nm) != null) {
+                            nm = linha.substring(index - 3, index - 2);
+                            if (TreeNumeros.get(nm) != null) {
+                                res = true;
+                                posBarra = index - 4;
+                            }
+                        }
+                    }
                 }
             }
 
             String[] qtBarra = linha.split("/");
-            
+
             if (res) {
                 boolean caracterNumero = true;
                 for (int i = posBarra; i < linha.length(); i--) {
@@ -310,7 +306,7 @@ public class MarquezzoAPagar extends SystemBase {
                 }
             } else {
                 index = linha.indexOf("NO");
-                
+
                 if (index > -1) {
                     int index2 = linha.indexOf(",");
                     if (index2 > -1 & index2 > index) {
@@ -333,12 +329,12 @@ public class MarquezzoAPagar extends SystemBase {
         }
     }
 
-    public boolean  new_ValorValido(){
+    public boolean new_ValorValido() {
         try {
             float valor = getValor();
             return true;
         } catch (Exception e) {
-           return false;
+            return false;
         }
     }
 
@@ -349,7 +345,6 @@ public class MarquezzoAPagar extends SystemBase {
             if (id > -1) {
                 for (int i = id; i < linha.length(); i++) {
                     String fracao1 = linha.substring((i), (i + 1));
-
 
                     if (TreeNumeros.get(fracao1) != null) {
                         String fracao2 = linha.substring((i + 1), (i + 2));
@@ -374,11 +369,8 @@ public class MarquezzoAPagar extends SystemBase {
         } catch (Exception e) {
             return false;
 
-
         } finally {
             return bl;
-
-
         }
     }
 
@@ -435,7 +427,7 @@ public class MarquezzoAPagar extends SystemBase {
         return vlr;
     }
 
-    public boolean isFornecedor() throws Exception {
+    public boolean isFornecedor_() throws Exception {
         try {
             boolean res = false;
             if (linha.length() >= 11) {
@@ -450,9 +442,34 @@ public class MarquezzoAPagar extends SystemBase {
             return res;
         } catch (Exception e) {
             return false;
-
         }
+    }
+    public String getFornecedor() {
+        int idxFor = linha.indexOf("Fornecedor");
+        String codFor = linha.substring(idxFor + 11, idxFor + 14).trim();
+        try {
+            int codf = Integer.parseInt(codFor);
+            return linha.substring(0, linha.indexOf("Fornecedor"));
+        } catch (Exception e) {
+        }
+        return linha.substring(11, linha.length()).trim();
+    }
 
+    public boolean isFornecedor() throws Exception {
+        try {
+            boolean res = false;
+            if (linha.length() >= 11) {
+                if(linha.indexOf("Fornecedor") > -1){
+                    if(linha.indexOf("Total") < 0  && linha.indexOf("(Provisão)") < 0){
+                        res = true;
+                    }
+                }
+                
+            }
+             return res;
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     public boolean isrodape() {
@@ -464,12 +481,13 @@ public class MarquezzoAPagar extends SystemBase {
         }
         return false;
 
-
     }
 
     /**
-     * método de leitura do arquivo PDF e inserção dos registro no banco de dados.
-     * @return resultado da leitura  e da inserção dos registros
+     * método de leitura do arquivo PDF e inserção dos registro no banco de
+     * dados.
+     *
+     * @return resultado da leitura e da inserção dos registros
      */
     public String read() {
         File file = null;
@@ -497,14 +515,14 @@ public class MarquezzoAPagar extends SystemBase {
             int cont = 0;
             while (br.ready()) {
                 lin++;
-                if(lin == 28 |lin == 10524 | lin == 10497| lin == 10509){
+                if (lin == 28 | lin == 10524 | lin == 10497 | lin == 10509) {
                     int o = 0;
                 }
-                if (lin == 41) {
+                if (lin == 123) {
                     int ff = 0;
                 }
                 linha = br.readLine();
-                System.out.println("A pagar " +lin + "  " + linha);
+                System.out.println("A pagar " + lin + "  " + linha);
                 if (isrodape()) {
                     cont_linhaRodape = 0;
                 }
@@ -519,6 +537,10 @@ public class MarquezzoAPagar extends SystemBase {
                         //if (cont > 0) {
                         valor = getValor();
                         documento = getCodigo();
+                        System.out.println(valor);
+                        if (valor == 1058.75f) {
+                            System.out.println(" é igual linha " + lin);
+                        }
 
                         String key = documento + "." + sdf.format(vencimento);
                         if (!contaExiste(key)) {
@@ -551,7 +573,6 @@ public class MarquezzoAPagar extends SystemBase {
         }
     }
 
-
     public void addObject(String fornecedor, String documento, Date vencimento, float valor, String hist) throws Exception {
         try {
             ctp_conta_pagarT_Insert.setCtp_nr_ano(this.ctp_conta_pagarT.getCtp_nr_ano());
@@ -575,7 +596,6 @@ public class MarquezzoAPagar extends SystemBase {
 
             ctp_conta_pagarDAO.insert(ctp_conta_pagarT_Insert);
             totalImp = totalImp + ctp_conta_pagarT_Insert.getCtp_nr_valor();
-
 
         } catch (Exception e) {
             System.out.println("Erro: " + documento);
