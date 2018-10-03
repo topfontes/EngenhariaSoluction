@@ -778,7 +778,11 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
                 ctp_conta_pagarT.setObr_nr_id(rs.getInt("obr_nr_id"));
 
                 String obs = rs.getString("ctp_tx_obs");
+<<<<<<< HEAD
                 if (obs != null && !obs.isEmpty()) {
+=======
+                if (!obs.isEmpty()) {
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
                     obs = getValueSemAspas(obs);
                 }
 
@@ -817,6 +821,7 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String key = ctp_conta_pagarT.getCtp_nr_documento() + "." + sdf.format(ctp_conta_pagarT.getCtp_dt_vencimento());
             i++;
+<<<<<<< HEAD
             objs.put(key, ctp_conta_pagarT);
 
         }
@@ -843,6 +848,8 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
 
             String key = ctp_conta_pagarT.getCtp_nr_documento() + "." + sdf.format(ctp_conta_pagarT.getCtp_dt_vencimento()) + "." + Funcoes.FormatoMoedaBR_Double(ctp_conta_pagarT.getCtp_nr_valor());
             i++;
+=======
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
             objs.put(key, ctp_conta_pagarT);
 
         }
@@ -1269,6 +1276,7 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
     public void setArquivo_engeb(boolean arquivo_engeb) {
         this.arquivo_engeb = arquivo_engeb;
     }
+<<<<<<< HEAD
 
     public TreeMap<Integer, Double> getCustoRealizadoAcumuladoAgrupadoSubClasseBI(int obr_nr_id, int mes, int ano, String status) throws Exception {
         /* 1095 */ PreparedStatement pStmt = null;
@@ -1311,5 +1319,52 @@ public class Ctp_conta_pagarDAO extends ObjectDAO {
         /*  778 */ return objs;
         /*      */    }
     /*      */
+=======
+    
+    
+     public TreeMap<Integer, Double> getCustoRealizadoAcumuladoAgrupadoSubClasseBI(int obr_nr_id, int mes, int ano, String status) throws Exception {
+/* 1095 */     PreparedStatement pStmt = null;
+/* 1096 */     ResultSet rs = null;
+/*      */     try {
+/* 1098 */       double valor = 0.0D;
+/* 1099 */       StringBuffer sql = new StringBuffer();
+/*      */       
+/* 1101 */       sql.append("select plc_nr_id, sum(ctp.ctp_nr_valor) as valor from easyconstru.ctp_conta_pagar as ctp");
+/*      */       
+/* 1103 */       sql.append(" where ctp.obr_nr_id =? and ((ctp_nr_mes <=? and ctp_nr_ano = ?) or ctp_nr_ano <?) ");
+/* 1104 */       sql.append(" and ctp.ctp_tx_status =? group by plc_nr_id");
+/*      */       
+/* 1106 */       pStmt = this.con.prepareStatement(sql.toString());
+/* 1107 */       pStmt.setObject(1, Integer.valueOf(obr_nr_id));
+/* 1108 */       pStmt.setObject(2, Integer.valueOf(mes));
+/* 1109 */       pStmt.setObject(3, Integer.valueOf(ano));
+/* 1110 */       pStmt.setObject(4, Integer.valueOf(ano));
+/* 1111 */       pStmt.setObject(5, status);
+/* 1112 */       rs = pStmt.executeQuery();
+/*      */       
+/* 1114 */       return resultSetToObjectTransferTreeBI(rs);
+/*      */     }
+/*      */     catch (Exception e)
+/*      */     {
+/* 1118 */       throw e;
+/*      */     } finally {
+/*      */       try {
+/* 1121 */         pStmt.close();
+/* 1122 */         rs.close();
+/*      */       }
+/*      */       catch (Exception localException2) {}
+/*      */     }
+/*      */   }
+    
+    private TreeMap<Integer, Double> resultSetToObjectTransferTreeBI(ResultSet rs) throws Exception {
+/*  773 */     TreeMap<Integer, Double> objs = new TreeMap();
+/*  774 */     int i = 1;
+/*  775 */     while (rs.next()) {
+/*  776 */       objs.put(Integer.valueOf(rs.getInt("plc_nr_id")), Double.valueOf(rs.getDouble("valor")));
+/*      */     }
+/*  778 */     return objs;
+/*      */   }
+/*      */   
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
 
 }

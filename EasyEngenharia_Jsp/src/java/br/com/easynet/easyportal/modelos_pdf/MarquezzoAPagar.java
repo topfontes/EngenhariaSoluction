@@ -149,6 +149,7 @@ public class MarquezzoAPagar extends SystemBase {
     public String getCodigo() {
         String cod = linha.substring(posDoc, linha.length()).trim();
         return cod;
+<<<<<<< HEAD
     }
 
 //    public String getFornecedor() {
@@ -156,6 +157,15 @@ public class MarquezzoAPagar extends SystemBase {
 //
 //    }
     
+=======
+
+    }
+
+    public String getFornecedor() {
+        return linha.substring(11, linha.length()).trim();
+
+    }
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
 
     public boolean isVencimento() {
         boolean res = false;
@@ -214,6 +224,7 @@ public class MarquezzoAPagar extends SystemBase {
         return p;
 
     }
+
 
     public int posEspaco() {
         int p = 0;

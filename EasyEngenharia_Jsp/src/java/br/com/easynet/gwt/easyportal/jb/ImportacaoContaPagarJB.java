@@ -227,6 +227,7 @@ public class ImportacaoContaPagarJB extends SystemBase implements INotSecurity {
                     }
                     break;
                 }
+<<<<<<< HEAD
                 case 15: {
                     if (ctp_conta_pagarT.getCtp_tx_status().equalsIgnoreCase("P")) {
                         AdmXlsPagas adm = new AdmXlsPagas(ctp_conta_pagarT, cdao, bais);
@@ -234,6 +235,8 @@ public class ImportacaoContaPagarJB extends SystemBase implements INotSecurity {
                     }
                     break;
                 }
+=======
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
 
             }
 

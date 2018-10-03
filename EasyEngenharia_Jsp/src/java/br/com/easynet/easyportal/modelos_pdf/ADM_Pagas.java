@@ -258,7 +258,11 @@ public class ADM_Pagas extends SystemBasePDF implements ModeloPDF {
                                     documento = "SD";
                                 }
                                 StringBuffer key = new StringBuffer().append(documento.trim()).append(".").append(sdf.format(vencimento));
+<<<<<<< HEAD
                                 key.append(".").append(fornecedor.trim()).append(".").append(Float.toString(valor));
+=======
+                                key.append(".").append(fornecedor).append(".").append(Float.toString(valor));
+>>>>>>> a4db9ab892e1ea7d1c17dcf771babd5319390c3c
                                 String keyStr = ctp_conta_pagarDAO.getValueSemAspas(key.toString());
                                 if (keyStr.length() > 299) {
                                     keyStr = keyStr.substring(0, 299).trim();
